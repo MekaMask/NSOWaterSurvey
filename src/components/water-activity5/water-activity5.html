@@ -1,0 +1,69 @@
+<!-- Generated template for the WaterActivity5Component component -->
+<div [formGroup]="FormItem">
+  <ion-item>
+    <ion-label>
+      <b>{{text}}</b>
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label col-8>
+      เพื่ออุปโภคบริโภค
+    </ion-label>
+    <ion-input type="number" placeholder="สัดส่วนที่ใช้ %" formControlName="drink" [class.invalid]="isValid('drink')"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="isValid('drink')" text-right>
+    <span class="invalid-msg">
+      กรุณากรอก
+    </span>
+  </ion-item>
+  <ion-item>
+    <ion-label col-8>
+      เพื่อรดน้ำพืชในบริเวณที่อยู่อาศัย
+    </ion-label>
+    <ion-input type="number" placeholder="สัดส่วนที่ใช้ %" formControlName="plant" [class.invalid]="isValid('plant')"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="isValid('plant')" text-right>
+    <span class="invalid-msg">
+      กรุณากรอก
+    </span>
+  </ion-item>
+  <ion-item>
+    <ion-label col-8>
+      เพื่อทำเกษตร
+    </ion-label>
+    <ion-input type="number" placeholder="สัดส่วนที่ใช้ %" formControlName="agriculture" [class.invalid]="isValid('agriculture')"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="isValid('agriculture')" text-right>
+    <span class="invalid-msg">
+      กรุณากรอก
+    </span>
+  </ion-item>
+  <ion-item>
+    <ion-label col-8>
+      เพื่อผลิตสินค้า
+    </ion-label>
+    <ion-input type="number" placeholder="สัดส่วนที่ใช้ %" formControlName="product" [class.invalid]="isValid('product')"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="isValid('product')" text-right>
+    <span class="invalid-msg">
+      กรุณากรอก
+    </span>
+  </ion-item>
+  <ion-item>
+    <ion-label col-8>
+      เพื่อการบริการ
+    </ion-label>
+    <ion-input type="number" placeholder="สัดส่วนที่ใช้ %" formControlName="service" [class.invalid]="isValid('service')"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="isValid('service')" text-right>
+    <span class="invalid-msg">
+      กรุณากรอก
+    </span>
+  </ion-item>
+  <ion-item>
+    <ion-label col-8>
+      <b>รวมทุกกิจกรรม</b>
+    </ion-label>
+    <ion-input placeholder="100" disabled="true"></ion-input>
+  </ion-item>
+</div>

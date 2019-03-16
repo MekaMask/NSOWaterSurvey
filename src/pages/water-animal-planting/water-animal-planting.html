@@ -1,0 +1,152 @@
+<ion-header>
+  <questionnaire-menu title="การเพาะเลี้ยงสัตว์น้ำในพื้นที่น้ำจืด "></questionnaire-menu>
+</ion-header>
+
+<ion-content padding>
+
+  <h3>ตอนที่ 2.9 การเพาะเลี้ยงสัตว์น้ำในพื้นที่น้ำจืด</h3>
+
+  <form (ngSubmit)="handleSubmit()" [formGroup]="f">
+
+    <ion-card>
+      <ion-card-content>
+
+        <ion-item>
+          <ion-label>
+            2.9.1 ในรอบ 12 เดือนที่ผ่านมาครัวเรือนนี้ทำการเพาะเลี้ยง<br> เพาะฟัก อนุบาลสัตว์น้ำในพื้นที่น้ำจืดหรือไม่
+          </ion-label>
+        </ion-item>
+
+        <ion-row radio-group formControlName="doing" [class.invalid]="isValid('doing')">
+          <ion-item *ngIf="isValid('doing')">
+            <span class="invalid-msg">
+              กรุณาเลือก
+            </span>
+          </ion-item>
+          <ion-item col-6>
+            <ion-radio [value]="true" item-left></ion-radio>
+            <ion-label>
+              ทำ
+            </ion-label>
+          </ion-item>
+          <ion-item col-6>
+            <ion-radio [value]="false" item-left></ion-radio>
+            <ion-label>
+              ไม่ทำ
+            </ion-label>
+          </ion-item>
+        </ion-row>
+
+      </ion-card-content>
+    </ion-card>
+
+    <div [ngSwitch]="f.get('doing').value">
+      <div *ngSwitchCase="true">
+        <ion-card>
+          <ion-card-content>
+
+            <div [class.invalid]="isValid('anycheck')">
+              <ion-item>
+                <ion-label>
+                  เลี้ยงสัตว์ชนิดใดบ้าง
+                </ion-label>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>
+                  <b>ชนิดสัตว์น้ำ</b>
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-checkbox  formControlName="isFish"></ion-checkbox>
+                <ion-label>
+                  1.ปลา
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-checkbox formControlName="isShrimp"></ion-checkbox>
+                <ion-label>
+                  2.กุ้ง
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-checkbox formControlName="isFrog"></ion-checkbox>
+                <ion-label>
+                  3.กบ
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-checkbox formControlName="isCrocodile"></ion-checkbox>
+                <ion-label>
+                  4.จระเข้
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-checkbox formControlName="isSnappingTurtle"></ion-checkbox>
+                <ion-label>
+                  5.ตะพาบน้ำ
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-checkbox formControlName="isCrab"></ion-checkbox>
+                <ion-label>
+                  6.ปู
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-checkbox formControlName="isShellFish"></ion-checkbox>
+                <ion-label>
+                  7.หอย
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-checkbox formControlName="isTurtle"></ion-checkbox>
+                <ion-label>
+                  8.เต่า
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-checkbox formControlName="isReddish"></ion-checkbox>
+                <ion-label>
+                  9.ไรแดง 
+                </ion-label>
+              </ion-item>
+            </div>
+
+          </ion-card-content>
+        </ion-card>
+
+        <div *ngIf="f.get('isFish').value">
+          <fish-farming headline="1. ปลา" type="ตัว" [FormItem]="f.get('fish')"></fish-farming>
+        </div>
+        <div *ngIf="f.get('isShrimp').value">
+          <fish-farming headline="2. กุ้ง" [FormItem]="f.get('shrimp')"></fish-farming>
+        </div>
+        <div *ngIf="f.get('isFrog').value">
+          <frog-farming headline="3. กบ" [FormItem]="f.get('frog')"></frog-farming>
+        </div>
+        <div *ngIf="f.get('isCrocodile').value">
+          <crocodile-farming headline="4. จระเข้" [FormItem]="f.get('crocodile')"></crocodile-farming>
+        </div>
+        <div *ngIf="f.get('isSnappingTurtle').value">
+          <crocodile-farming headline="5. ตะพาบน้ำ" [FormItem]="f.get('snappingTurtle')"></crocodile-farming>
+        </div>
+        <div *ngIf="f.get('isCrab').value">
+          <fish-farming headline="6. ปู" [FormItem]="f.get('crab')"></fish-farming>
+        </div>
+        <div *ngIf="f.get('isShellFish').value">
+          <fish-farming headline="7. หอย" [FormItem]="f.get('shellFish')"></fish-farming>
+        </div>
+        <div *ngIf="f.get('isTurtle').value">
+          <crocodile-farming headline="8. เต่า" [FormItem]="f.get('turtle')"></crocodile-farming>
+        </div>
+        <div *ngIf="f.get('isReddish').value">
+          <fish-farming headline="9. ไรแดง" [FormItem]="f.get('reddish')"></fish-farming>
+        </div>
+      </div>
+    </div>
+
+    <form-buttons-bar></form-buttons-bar>
+  </form>
+
+</ion-content>

@@ -1,0 +1,83 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ text }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="FormItem" (ngSubmit)="okDialog()">
+
+   
+      <ion-item>
+        <ion-label>จำนวนครั้งที่เกิดอุทกภัย</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-input type="number" formControlName="count" [class.invalid]="isValid('count')"></ion-input>
+      </ion-item>
+      
+    <ion-item *ngIf="isValid('count')">
+        <span class="invalid-msg">
+          กรุณากรอกข้อมูล
+        </span>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>ระยะเวลาที่เกิดน้ำท่วมเฉลี่ยนานกี่วัน</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-input type="number" formControlName="avgday" [class.invalid]="isValid('avgday')"></ion-input>
+      </ion-item>
+      
+    <ion-item *ngIf="isValid('avgday')">
+        <span class="invalid-msg">
+          กรุณากรอกข้อมูล
+        </span>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>ระยะเวลาที่เกิดน้ำท่วมเฉลี่ยนานกี่ชั่วโมง</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-input type="number" formControlName="avghour" [class.invalid]="isValid('avghour')"></ion-input>
+      </ion-item>
+      
+    <ion-item *ngIf="isValid('avghour')">
+        <span class="invalid-msg">
+          กรุณากรอกข้อมูล
+        </span>
+      </ion-item>
+      <ion-item>
+        <ion-label>ระดับความสูงเฉลี่ย (เซนติเมตร)</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-input type="number" formControlName="height" [class.invalid]="isValid('height')"></ion-input>
+      </ion-item>
+      
+    <ion-item *ngIf="isValid('height')">
+        <span class="invalid-msg">
+          กรุณากรอกข้อมูล
+        </span>
+      </ion-item>
+    
+
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+            <button ion-button type="button" block color="light" (click)="closeDialog()">Cancel</button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block [disabled]="FormItem.invalid">OK</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+  </form>
+
+
+
+
+</ion-content>

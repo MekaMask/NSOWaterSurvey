@@ -1,0 +1,14 @@
+<ion-navbar>
+  <button ion-button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-row>
+    <ion-title>{{ text }}</ion-title>
+    <ion-label text-right>หน่วยตัวอย่าง ลำดับที่ 1</ion-label>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="showQuickMenu($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-row>
+</ion-navbar>

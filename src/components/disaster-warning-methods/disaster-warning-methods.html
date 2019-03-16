@@ -1,0 +1,52 @@
+<!-- Generated template for the DisasterWarningMethodsComponent component -->
+<div [formGroup]="FormItem">
+
+  <ion-row [class.invalid]="isValid('anycheck')">
+
+    <ion-col>
+      <ion-item>
+        <ion-label>
+          ลักษณะการดำเนินการ
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          2.1 ระบบเป็นไปตามระบบของทางราชการ
+        </ion-label>
+        <ion-checkbox formControlName="governmentProcess"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          2.2 มี โดยหมู่บ้าน/ชุมชนร่วมกันวางแผนจัดการเอง
+        </ion-label>
+        <ion-checkbox formControlName="communityPlan"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          2.3 มี โดยมีหน่วยงานอื่นให้คำแนะนำและบริหารจัดการ
+        </ion-label>
+        <ion-checkbox formControlName="consultingService"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          2.4 มี ลักษณะการดำเนินงานอื่น
+        </ion-label>
+        <ion-checkbox formControlName="hasOther"></ion-checkbox>
+      </ion-item>
+
+      <ion-item *ngIf="FormItem.get('hasOther').value || false">
+        <ion-label>
+          ระบุลักษณะการดำเนินงาน
+        </ion-label>
+        <ion-input [class.invalid]="isValid('other')" formControlName="other"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="isValid('other')" class="invalid-msg">
+        <span>
+          กรุณากรอกข้อมูล
+        </span>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+
+</div>

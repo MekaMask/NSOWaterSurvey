@@ -1,0 +1,93 @@
+<ion-header>
+
+  <questionnaire-menu title="พืชยืนต้น ไม้ผล สวนป่า "></questionnaire-menu>
+
+</ion-header>
+
+<ion-content padding>
+  <form (ngSubmit)="handleSubmit()" [formGroup]="PerennialPlantingFrm">
+
+
+    <h3>ตอนที่ 2.4 พืชยืนต้น ไม้ผล สวนป่า</h3>
+    <ion-card>
+      <ion-card-content>
+        <dl>
+          <dd>
+            <b>พืชยืนต้น ไม้ผล</b>
+          </dd>
+          <dt>
+            เช่น กระท้อน กล้วย แก้วมังกร จาก เงาะ ชมพู่ หมาก หวาย หม่อน มะม่วง มะนาว มังคุด ทุเรียน ลิ้นจี่ มะละกอ
+            ลองกอง ลางสาด สะตอ สะเดา ส้มโอ ส้มเขียวหวาน น้อยหน่า องุ่น แอ๊ปเปิ้ล มะพร้าว ปาล์มน้ำมัน เป็นต้น</dt>
+          <dd>
+            <b> สวนป่า </b>
+          </dd>
+          <dt>
+            เช่น กระถินณรงค์ กฤษณา โกงกาง ชิงชัน แดง ตะเคียนทอง ทองหลาง ตีนเป็ด ประดู่ ไผ่ มะค่าโมง ยางนา ยูคาลิปตัส สน
+            สัก เป็นต้น</dt>
+        </dl>
+
+      </ion-card-content>
+
+    </ion-card>
+
+    <ion-card>
+      <ion-card-content>
+
+        <ion-item>
+          <ion-label>
+            2.4.1 ในรอบ 12 เดือนที่ผ่านมาครัวเรือนนี้ได้ปลูก <br><b>พืชยืนต้น ไม้ผล สวนป่า</b> หรือไม่
+          </ion-label>
+        </ion-item>
+
+        <ion-row radio-group formControlName="doing" [class.invalid]="isValid('doing')">
+          <ion-item *ngIf="isValid('doing')">
+            <span class="invalid-msg">
+              กรุณาเลือก
+            </span>
+          </ion-item>
+          <ion-item col-6>
+            <ion-radio [value]="true" item-left></ion-radio>
+            <ion-label>
+              ปลูก
+            </ion-label>
+          </ion-item>
+          <ion-item col-6>
+            <ion-radio [value]="false" item-left></ion-radio>
+            <ion-label>
+              ไม่ปลูก
+            </ion-label>
+          </ion-item>
+        </ion-row>
+
+        <div *ngIf="PerennialPlantingFrm.get('doing').value">
+          <ion-item>
+            <ion-label>
+              2.4.2 ถ้า “ปลูก” มีพื้นที่ปลูก<b>พืชยืนต้น ไม้ผล สวนป่า</b> <br>จำนวนกี่แปลง
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-input type="number" class="backgroundinput" placeholder="กรอกจำนวนแปลง" formControlName="fieldCount"
+              [class.invalid]="isValid('fieldCount')"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="isValid('fieldCount')">
+            <span class="invalid-msg">
+              กรุณากรอกจำนวน
+            </span>
+          </ion-item>
+        </div>
+
+      </ion-card-content>
+    </ion-card>
+
+
+    <div *ngIf="PerennialPlantingFrm.get('fieldCount').value > 0 && PerennialPlantingFrm.get('doing').value">
+      <div *ngFor="let p of PerennialPlantingFrm.get('fields').controls;let i = index">
+        <field-perenial-planting [no]="i+1" [FormItem]="p"></field-perenial-planting>
+      </div>
+    </div>
+
+    <form-buttons-bar></form-buttons-bar>
+
+  </form>
+</ion-content>

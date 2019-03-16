@@ -1,0 +1,71 @@
+
+<ion-header>
+
+  <questionnaire-menu title="การเลี้ยงสัตว์เพื่อขายหรือใช้งานเกษตร"></questionnaire-menu>
+
+</ion-header>
+
+
+<ion-content padding>
+  <h3>ตอนที่ 2.8 การเลี้ยงสัตว์เพื่อขายหรือใช้งานเกษตร</h3>
+  <form (ngSubmit)="handleSubmit()" [formGroup]="f">
+    <ion-card>
+
+      <ion-item>
+        <ion-label>
+          2.8.1 ในรอบ 12 เดือนที่ผ่านมาครัวเรือนนี้มี<b>การเลี้ยงสัตว์<br> เพื่อขายหรือใช้งานเกษตรหรือไม่ (ไม่นับสัตว์เลี้ยงที่เลี้ยงไว้ดูเล่น)</b>
+        </ion-label>
+      </ion-item>
+      <ion-row radio-group formControlName="doing" [class.invalid]="isValid('doing')">
+        <ion-item *ngIf="isValid('doing')">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item>
+
+        <ion-item col-6>
+          <ion-radio [value]="true" item-left></ion-radio>
+          <ion-label>
+            มี
+          </ion-label>
+        </ion-item>
+        <ion-item col-6>
+          <ion-radio [value]="false" item-left></ion-radio>
+          <ion-label>
+            ไม่มี
+          </ion-label>
+        </ion-item>
+      </ion-row>
+    </ion-card>
+
+    <div [ngSwitch]="f.get('doing').value">
+        <div *ngSwitchCase="true">
+    <ion-card>
+      <ion-item>
+        <ion-label>
+          2.8.2 ถ้า "มี" เลี้ยงสัตว์ชนิดใดบ้าง ในรอบ 12 เดือนที่ผ่านมา <br>เลี้ยงสัตว์แต่ละชนิด<b>เฉลี่ยเดือนละกี่ตัว</b>
+        </ion-label>
+      </ion-item>
+      <ion-list>
+        <table-check-item-count unit="ตัว" [ititle]="'1. วัว '" [FormItem]="f.get('cow')"></table-check-item-count>
+        <table-check-item-count unit="ตัว" [ititle]="'2. ควาย'" [FormItem]="f.get('buffalo')"></table-check-item-count>
+        <table-check-item-count unit="ตัว" [ititle]="'3. หมู'" [FormItem]="f.get('pig')"></table-check-item-count>
+        <table-check-item-count unit="ตัว" [ititle]="'4. แพะ'" [FormItem]="f.get('goat')"></table-check-item-count>
+        <table-check-item-count unit="ตัว" [ititle]="'5. แกะ'" [FormItem]="f.get('sheep')"></table-check-item-count>
+        <table-check-item-count unit="ตัว" [ititle]="'6. ไก่ '" [FormItem]="f.get('chicken')"></table-check-item-count>
+        <table-check-item-count unit="ตัว" [ititle]="'7. เป็ด'" [FormItem]="f.get('duck')"></table-check-item-count>
+        <table-check-item-count unit="ตัว" [ititle]="'8. ห่าน'" [FormItem]="f.get('goose')"></table-check-item-count>
+        <table-check-item-count unit=" กก." [ititle]="'9. ไหม'" [FormItem]="f.get('silkWool')"></table-check-item-count>
+        <table-check-item-count unit="เท่าไร" [ititle]="'10. อื่นๆ (เช่น ฟาร์มสุนัข แมว กระต่าย หนู นกกระจอกเทศ) '" [FormItem]="f.get('other')"></table-check-item-count>
+      </ion-list>
+    </ion-card>
+
+    <water-sources9 [headline]="'2.8.3 การเลี้ยงสัตว์นี้ใช้น้ำจากแหล่งใดบ้าง (เลือกได้หลายข้อ)'" [FormItem]="f.get('waterSources')"></water-sources9>
+
+    </div>
+    </div>
+    <form-buttons-bar></form-buttons-bar>
+
+  </form>
+
+</ion-content>

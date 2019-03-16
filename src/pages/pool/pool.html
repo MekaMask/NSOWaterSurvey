@@ -1,0 +1,132 @@
+<ion-header>
+  <questionnaire-menu title="น้ำจากสระน้ำ/หนองน้ำ/บึง "></questionnaire-menu>
+</ion-header>
+
+<ion-content padding>
+
+
+  <h3>5.4 น้ำจากสระน้ำ/หนองน้ำ/บึง</h3>
+
+  <form (ngSubmit)="handleSubmit()" [formGroup]="f">
+
+    <ion-card>
+      <ion-card-content>
+
+        <ion-item>
+          <ion-label>
+            5.4.1 ในพื้นที่ที่อยู่อาศัย สวน ไร่ นา สถานประกอบการมี<br>สระน้ำ หนองน้ำ บึง หรือไม่
+          </ion-label>
+        </ion-item>
+
+        <ion-row radio-group formControlName="doing" [class.invalid]="isValid('doing')">
+          <ion-item *ngIf="isValid('doing')">
+            <span class="invalid-msg">
+              กรุณาเลือก
+            </span>
+          </ion-item>
+          <ion-item col-6>
+            <ion-radio [value]="true" item-left></ion-radio>
+            <ion-label>
+              มี
+            </ion-label>
+          </ion-item>
+          <ion-item col-6>
+            <ion-radio [value]="false" item-left></ion-radio>
+            <ion-label>
+              ไม่มี
+            </ion-label>
+          </ion-item>
+        </ion-row>
+
+        <div [ngSwitch]="f.get('doing').value">
+          <div *ngSwitchCase="true">
+            <ion-item>
+              <ion-label>
+                5.4.2 มีจำนวนกี่สระ
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-input type="number" placeholder="กรอกจำนวน" formControlName="poolCount" [class.invalid]="isValid('poolCount')"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="isValid('poolCount')">
+              <span class="invalid-msg">
+                กรุณากรอกจำนวน
+              </span>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                5.4.3 ขนาดสระน้ำทั้งหมดเท่ากันหรือไม่
+              </ion-label>
+            </ion-item>
+            <ion-row radio-group formControlName="hasSameSize" [class.invalid]="isValid('hasSameSize')">
+              <ion-item *ngIf="isValid('hasSameSize')">
+                <span class="invalid-msg">
+                  กรุณาเลือก
+                </span>
+              </ion-item>
+              <ion-item col-6>
+                <ion-radio [value]="true" item-left></ion-radio>
+                <ion-label>
+                  เท่ากัน
+                </ion-label>
+              </ion-item>
+              <ion-item col-6>
+                <ion-radio [value]="false" item-left></ion-radio>
+                <ion-label>
+                  ไม่เท่า
+                </ion-label>
+              </ion-item>
+            </ion-row>
+          </div>
+        </div>
+
+      </ion-card-content>
+    </ion-card>
+
+    <div [ngSwitch]="f.get('doing').value">
+      <div *ngSwitchCase="true">
+         
+        <div [ngSwitch]="f.get('hasSameSize').value">
+          <!-- เท่ากัน -->
+          <div *ngSwitchCase="true">
+            <pool-area *ngIf="f.get('poolSizes').length > 0" headline="ขนาดสระน้ำ" [FormItem]="f.get('poolSizes').at(0)"></pool-area>
+          </div>
+          <!-- ไม่เท่ากัน -->
+          <div *ngSwitchCase="false">
+            <div *ngFor="let pool of f.get('poolSizes').controls; let i = index">
+              <pool-area headline="สระที่ " [no]="i + 1" [FormItem]="pool"></pool-area>
+            </div>
+          </div>
+        </div>
+
+        <ion-card>
+          <ion-card-content>
+            <ion-item>
+              <ion-label>
+                5.4.4 ในรอบ 12 เดือนที่ผ่านมามีกี่สระ<b>ที่นำน้ำมาใช้</b>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-input type="number" placeholder="กรอกจำนวนสระ" formControlName="waterResourceCount" [class.invalid]="isValid('waterResourceCount')"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="isValid('waterResourceCount')">
+              <span class="invalid-msg">
+                กรุณากรอกจำนวน
+              </span>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+
+        <div *ngIf="f.get('doing').value == 1 && f.get('waterResourceCount').value > 0">
+          <div *ngFor="let pool of f.get('waterResources').controls; let i = index">
+            <pool-usage [no]="i + 1" [FormItem]="pool"></pool-usage>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <form-buttons-bar></form-buttons-bar>
+
+  </form>
+</ion-content>

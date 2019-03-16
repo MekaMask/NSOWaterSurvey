@@ -1,0 +1,71 @@
+<ion-header>
+  <questionnaire-menu title="เพาะเชื้อและปลูกเห็ด "></questionnaire-menu>
+</ion-header>
+
+<ion-content padding>
+
+  <form (ngSubmit)="handleSubmit()" [formGroup]="f">
+
+    <h3>ตอนที่ 2.7 เพาะเชื้อและปลูกเห็ด</h3>
+
+    <ion-card>
+      <ion-card-content>
+
+        <ion-item>
+          <ion-label>
+            2.7.1 ในรอบ 12 เดือนที่ผ่านมาครัวเรือนนี้ได้<b>เพาะเชื้อและปลูกเห็ด</b><br> หรือไม่
+          </ion-label>
+        </ion-item>
+
+        <ion-row radio-group formControlName="doing" [class.invalid]="isValid('doing')">
+          <ion-item *ngIf="isValid('doing')">
+            <span class="invalid-msg">
+              กรุณาเลือก
+            </span>
+          </ion-item>
+          <ion-item col-6>
+            <ion-radio [value] = "true" item-left></ion-radio>
+            <ion-label>
+              1. ปลูก
+            </ion-label>
+          </ion-item>
+          <ion-item col-6>
+            <ion-radio [value] = "false" item-left></ion-radio>
+            <ion-label>
+              2. ไม่ปลูก
+            </ion-label>
+          </ion-item>
+        </ion-row>
+
+        <div [ngSwitch]="f.get('doing').value">
+          <div *ngSwitchCase="true">
+            <ion-item>
+              <ion-label>
+                2.7.2 ถ้า "ปลูก" มีพื้นที่<b>เพาะเชื้อและปลูกเห็ด</b> จำนวนกี่โรงเรือน
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-input class="backgroundinput" type="number" placeholder="กรอกจำนวนโรงเรือน" formControlName="fieldCount"
+                [class.invalid]="isValid('fieldCount')"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="isValid('fieldCount')">
+              <span class="invalid-msg">
+                กรุณากรอกจำนวน
+              </span>
+            </ion-item>
+          </div>
+        </div>
+
+      </ion-card-content>
+    </ion-card>
+
+    <div *ngIf="f.get('doing').value && f.get('fieldCount').value > 0">
+      <div *ngFor="let far of f.get('fields').controls; let i = index">
+        <field-mushroom [no]="i + 1" [FormItem]="far"></field-mushroom>
+      </div>
+    </div>
+
+    <form-buttons-bar></form-buttons-bar>
+
+  </form>
+</ion-content>

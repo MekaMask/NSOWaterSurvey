@@ -1,0 +1,18 @@
+<ion-header>
+
+  <questionnaire-menu title="Community Sample Test"></questionnaire-menu>
+
+</ion-header>
+
+
+<ion-content padding>
+
+<h3>สำมะโนน้ำฯ (ชุมชน)</h3>
+
+<ion-list>
+  <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+    {{p.title}}
+  </button>
+</ion-list>
+
+</ion-content>

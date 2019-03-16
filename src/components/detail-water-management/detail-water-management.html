@@ -1,0 +1,82 @@
+<!-- Generated template for the DetailWaterManagementComponent component -->
+<div [formGroup]="FormItem">
+<ion-card>
+  <ion-card-content>
+    <ion-item>
+      <ion-label>
+        <b>3. ข้อมูลแหล่งน้ำที่ {{fieldNo}}</b>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        3.1 ชื่ออะไร
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-input [class.invalid]="isValid('name')" formControlName="name" type="text" placeholder="ชื่อแหล่งน้ำ"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="isValid('name')">
+        <span class="invalid-msg">
+          กรุณากรอกข้อมูล
+        </span>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label>
+          3.2 แหล่งน้ำนี้ใช้ทำประโยชน์อะไรบ้าง
+        </ion-label>
+      </ion-item>
+      
+      <div [class.invalid]="isValid('anycheck')">
+    <ion-item>
+      <ion-checkbox formControlName="useForPlumbing" ></ion-checkbox>
+      <ion-label>
+        1. ใช้ทำน้ำประปา
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="useForFactory"></ion-checkbox>
+      <ion-label>
+        2. ใช้ในการผลิต/อุตสาหกรรม
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="useForFarming"></ion-checkbox>
+      <ion-label>
+        3. ใช้เพื่อการเกษตร
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="useForService"></ion-checkbox>
+      <ion-label>
+        4. ใช้เพื่อการบริการ
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="useForOther"></ion-checkbox>
+      <ion-label>
+        5. อื่นๆ
+      </ion-label>
+    </ion-item>
+    
+    <ion-item *ngIf="FormItem.get('useForOther').value || false">
+        <ion-label>
+          โปรดระบุ
+        </ion-label>
+        <ion-input [class.invalid]="isValid('other')" formControlName="other"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="isValid('other')" class="invalid-msg">
+        <span>
+          กรุณากรอกข้อมูล
+        </span>
+      </ion-item>
+
+  </div>
+
+    <pool-area headline="3.3 ขนาดของแหล่งน้ำ " [FormItem]="FormItem.get('projectArea')"></pool-area>
+  </ion-card-content>
+</ion-card>
+</div>

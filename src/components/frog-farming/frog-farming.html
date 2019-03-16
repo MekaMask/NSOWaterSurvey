@@ -1,0 +1,69 @@
+<div [formGroup]="FormItem">
+
+  <ion-card>
+    <ion-card-content>
+
+      <ion-item>
+        <ion-label>
+          <h3>{{ text }}</h3>
+        </ion-label>
+      </ion-item>
+
+      <div [class.invalid]="isValid('anycheck')">
+        <ion-item>
+          <ion-label>
+            1) ลักษณะการเลี้ยงเป็นอย่างไร
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-checkbox formControlName="depression"></ion-checkbox>
+          <ion-label>
+            1.บ่อ
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-checkbox formControlName="stew"></ion-checkbox>
+          <ion-label>
+            2.กระชังบก
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            3. อื่น ๆ
+          </ion-label>
+          <ion-checkbox formControlName="hasOther"></ion-checkbox>
+        </ion-item>
+      </div>
+
+      <ion-item *ngIf="FormItem.get('hasOther').value || false">
+        <ion-label>
+          โปรดระบุ
+        </ion-label>
+        <ion-input [class.invalid]="isValid('other')" formControlName="other"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="isValid('other')" class="invalid-msg">
+        <span>
+          กรุณากรอกข้อมูล
+        </span>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          2) จำนวนกบที่เลี้ยงเฉลี่ยต่อเดือน เดือนละกี่ตัว
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-input type="number" placeholder="กรอกจำนวน" formControlName="animalsCount" [class.invalid]="isValid('animalsCount')"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="isValid('animalsCount')">
+        <span class="invalid-msg">
+          กรุณากรอกจำนวน
+        </span>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
+
+  <water-sources9 [FormItem]="FormItem.get('waterSources')" headline="3) การเลี้ยงสัตว์น้ำใช้น้ำจากแหล่งใดบ้าง"></water-sources9>
+
+</div>

@@ -1,0 +1,325 @@
+<ion-header>
+
+  <questionnaire-menu title="ข้อมูลพื้นฐานส่วนบุคคล "></questionnaire-menu>
+
+</ion-header>
+<ion-content padding>
+  <h3>ข้อมูลพื้นฐานส่วนบุคคล</h3>
+  <form (ngSubmit)="handleSubmit()" [formGroup]="userInfo">
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>
+            ชื่อผู้ให้ข้อมูล
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-input formControlName="informer" [class.invalid]="isValid('informer')" class="backgroundinput" type="text"
+            placeholder="กรอกชื่อผู้ให้ข้อมูล"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="isValid('informer')">
+          <span class="invalid-msg">
+            กรุณากรอก
+          </span>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            ประเภทสถานประกอบการผลิต
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          {{ factorialCategory$ | async }}
+        </ion-item>
+        <ion-item>
+          {{ facCategory }}
+        </ion-item>
+          <ion-item>
+            <ion-label>
+              เลือกประเภท
+            </ion-label>
+            <ion-select interface="action-sheet" formControlName="factorialCategoryCode" [class.invalid]="isValid('factorialCategoryCode')">
+              <ion-option [value]="1">
+                การผลิตผลิตภัณฑ์อาหาร 
+              </ion-option>
+              <ion-option [value]="2">
+                การผลิตเครื่องดื่ม 
+              </ion-option>
+              <ion-option [value]="3">
+                การผลิตผลิตภัณฑ์ยาสูบ
+              </ion-option>
+              <ion-option [value]="4">
+                การผลิตสิ่งทอ 
+              </ion-option>
+              <ion-option [value]="5">
+                การผลิตเสื้อผ้าเครื่องแต่งกาย 
+              </ion-option>
+              <ion-option [value]="6">
+                การผลิตเครื่องหนังและผลิตภัณฑ์ที่เกี่ยวข้อง 
+              </ion-option>
+              <ion-option [value]="7">
+                การผลิตไม้และผลิตภัณฑ์จากไม้และไม้ก๊อก (ยกเว้นเฟอร์นิเจอร์) การผลิตสิ่งของจากฟางและวัสดุถักสานอื่นๆ
+              </ion-option>
+              <ion-option [value]="8">
+                การผลิตกระดาษและผลิตภัณฑ์กระดาษ
+              </ion-option>
+              <ion-option [value]="9">
+                การพิมพ์และการผลิตซ้ำสื่อบันทึกข้อมูล  
+              </ion-option>
+              <ion-option [value]="10">
+                การผลิตถ่านโค้กและผลิตภัณฑ์จากการกลั่นปิโตรเลียม 
+              </ion-option>
+              <ion-option [value]="11">
+                การผลิตเคมีภัณฑ์และผลิตภัณฑ์เคมี
+              </ion-option>
+              <ion-option [value]="12">
+                การผลิตเภสัชภัณฑ์ เคมีภัณฑ์ที่ใช้รักษาโรคและผลิตภัณฑ์จากพืชและสัตว์ที่ใช้รักษาโรค 
+              </ion-option>
+              <ion-option [value]="13">
+                การผลิตผลิตภัณฑ์ยางและพลาสติก
+              </ion-option>
+              <ion-option [value]="14">
+                การผลิตผลิตภัณฑ์อื่นๆที่ทำจากแร่อโลหะ
+              </ion-option>
+              <ion-option [value]="15">
+                การผลิตโลหะขั้นมูลฐาน
+              </ion-option>
+              <ion-option [value]="16">
+                การผลิตผลิตภัณฑ์ที่ทำจากโลหะประดิษฐ์ (ยกเว้นเครื่องจักรและอุปกรณ์)
+              </ion-option>
+              <ion-option [value]="17">
+                การผลิตผลิตภัณฑ์คอมพิวเตอร์อิเล็กทรอนิกส์ และอุปกรณ์ที่ใช้ในทางทัศนศาสตร์ 
+              </ion-option>
+              <ion-option [value]="18">
+                การผลิตอุปกรณ์ไฟฟ้า
+              </ion-option>
+              <ion-option [value]="19">
+                การผลิตเครื่องจักรและเครื่องมือ ซึ่งมิได้จัดประเภทไว้ในที่อื่น
+              </ion-option>
+              <ion-option [value]="20">
+                การผลิตยานยนต์ รถพ่วง กึ่งรถพ่วง  
+              </ion-option>
+              <ion-option [value]="21">
+                การผลิตอุปกรณ์ขนส่งอื่นๆ 
+              </ion-option>
+              <ion-option [value]="22">
+                การผลิตเฟอร์นิจอร์
+              </ion-option>
+              <ion-option [value]="23">
+                การผลิตผลิตภัณฑ์ประเภทอื่นๆ
+              </ion-option>
+              <ion-option [value]="24">
+                การซ่อมและการติดตั้งเครื่องจักรและอุปกรณ์
+              </ion-option>
+              <ion-option [value]="25">
+                การจัดการน้ำเสีย
+              </ion-option>
+              <ion-option [value]="26">
+                การเก็บรวบรวมของเสีย การบำบัด และการกำจัดของเสีย รวมถึงการนำของเสียกลับมาใช้ใหม่ 
+              </ion-option>
+              <ion-option [value]="27">
+                กิจกรรมการบำบัดและบริการจัดการของเสียอื่นๆ
+              </ion-option>             
+              
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf="isValid('factorialCategoryCode')">
+            <span class="invalid-msg">
+              กรุณาเลือก
+            </span>
+          </ion-item>
+
+        <ion-item>
+          <ion-label>
+            ประเภทสถานประกอบการบริการ
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          {{ commercialServiceType }}
+        </ion-item>
+
+          <ion-item>
+            <ion-label>
+              เลือกประเภท
+            </ion-label>
+            <ion-select interface="action-sheet" formControlName="serviceTypeCode" [class.invalid]="isValid('serviceTypeCode')">
+              <ion-option [value]="1">
+                การก่อสร้างอาคาร
+              </ion-option>
+              <ion-option [value]="2">
+                งานวิศวกรรมโยธา 
+              </ion-option>
+              <ion-option [value]="3">
+                งานก่อนสร้างเฉพาะงาน
+              </ion-option>
+              <ion-option [value]="4">
+                การขายส่งและการขายปลีก การซ่อมยานยนต์และจักรยานยนต์
+              </ion-option>
+              <ion-option [value]="5">
+                การขายส่ง (ยกเว้นยานยนต์และจักรยานยนต์) 
+              </ion-option>
+              <ion-option [value]="6">
+                การขายปลีก (ยกเว้นยานยนต์และจักรยานยนต์) 
+              </ion-option>
+              <ion-option [value]="7">
+                การขนส่งทางบกและการขนส่งทางท่อลำเลียง 
+              </ion-option>
+              <ion-option [value]="8">
+                การขนส่งทางน้ำ 
+              </ion-option>
+              <ion-option [value]="9">
+                การขนส่งทางอากาศ 
+              </ion-option>
+              <ion-option [value]="10">
+                กิจกรรมคลังสินค้าและกิจกรรมที่สนับสนุนการขนส่ง
+              </ion-option>
+              <ion-option [value]="11">
+                กิจกรรมไปรษณีย์และการรับส่งพัสดุภัณฑ์
+              </ion-option>
+              <ion-option [value]="12">
+                ที่พักแรม (ระยะสั้น) 
+              </ion-option>
+              <ion-option [value]="13">
+                การบริการอาหารและเครื่องดื่ม            
+                </ion-option>
+              <ion-option [value]="14">
+                การผลิตภาพยนตร์ วีดีทัศน์ และรายการโทรทัศน์ การบันทึกเสียงลงบนสื่อ และการจัดพิมพ์จำหน่ายหรือเผยแพร่ดนตรี  
+              </ion-option>
+              <ion-option [value]="15">
+                การจัดผังรายการและการแพร่ภาพกระจายเสียง 
+              </ion-option>
+              <ion-option [value]="16">
+                การโทรคมนาคม            
+                </ion-option>
+              <ion-option [value]="17">
+                การจัดทำโปรแกรมคอมพิวเตอร์ การให้คำปรึกษาเกี่ยวกับคอมพิวเตอร์ และกิจกรรมที่เกี่ยวข้อง 
+              </ion-option>
+              <ion-option [value]="18">
+                การบริการสารสนเทศ  
+              </ion-option>
+              <ion-option [value]="19">
+                กิจกรรมบริการทางการเงิน (ยกเว้นการประกันภัยและกองทุนบำเหน็จบำนาญ)
+              </ion-option>
+              <ion-option [value]="20">
+                การประกันภัย การประกันภัยต่อ และกองทุนบำเหน็จบำนาญ (ยกเว้นการประกันสังคมภาคบังคับ)          
+                   </ion-option>
+              <ion-option [value]="21">
+                กิจกรรมสนับสนุนการบริการทางการเงินและประกันภัย
+              </ion-option>
+              <ion-option [value]="22">
+                กิจกรรมอสังหาริมทรัพย์
+              </ion-option>
+              <ion-option [value]="23">
+                กิจกรรมทางกฏหมายและการบัญชี 
+              </ion-option>
+              <ion-option [value]="24">
+                กิจกรรมของสำนักงานใหญ่และการบริการให้คำปรึกษาด้านการบริหารจัดการ  
+              </ion-option>
+              <ion-option [value]="25">
+                กิจกรรมด้านสถาปัตยกรรมและวิศวกรรม รวมถึงการทดสอบและการวิเคราะห์ทางเทคนิค  
+              </ion-option>
+              <ion-option [value]="26">
+                การวิจัยและพัฒนาเชิงวิทยาศาสตร์
+              </ion-option>
+              <ion-option [value]="27">
+                การโฆษณาและการวิจัยตลาด
+              </ion-option>
+              <ion-option [value]="28">
+                กิจกรรมทางวิชาชีพ วิทยาศาสตร์ และเทคนิคอื่นๆ  
+              </ion-option>
+              <ion-option [value]="29">
+                การบริการรักษาสัตว์ 
+              </ion-option>
+              <ion-option [value]="30">
+                กิจกรรมการให้เช่า  
+              </ion-option>
+              <ion-option [value]="31">
+                กิจกรรมการจ้างงาน
+              </ion-option>
+              <ion-option [value]="32">
+                กิจกรรมของตัวแทนธุรกิจท่องเที่ยว การจัดนำเที่ยว การบริการสำรอง และกิจกรรมที่เกี่ยวข้อง 
+              </ion-option>
+              <ion-option [value]="33">
+                การบริการรักษาความปลอดภัยและการสืบสวน
+              </ion-option>
+              <ion-option [value]="34">
+                กิจกรรมการบริการสำหรับอาคารและภูมิทัศน์ 
+              </ion-option>
+              <ion-option [value]="35">
+                การบริการด้านบริหารและสนับสนุนการดำเนินงานของสำนักงานและกิจกรรมอื่นๆที่สนับสนุนทางธุรกิจ
+              </ion-option>
+              <ion-option [value]="36">
+                การศึกษา
+              </ion-option>
+              <ion-option [value]="37">
+                กิจกรรมด้านสุขภาพของมนุษย์  
+              </ion-option>
+              <ion-option [value]="38">
+                กิจกรรมการให้การดูแลที่ให้ที่พัก
+              </ion-option>
+              <ion-option [value]="39">
+                กิจกรรมสังคมสงเคราะห์ที่ไม่ให้ที่พัก 
+              </ion-option>
+              <ion-option [value]="40">
+                กิจกรรมการสร้างสรรค์ศิลปะและความบันเทิง  
+              </ion-option>
+              <ion-option [value]="41">
+                กิจกรรมห้องสมุด หอจดหมายเหตุ พิพิธภัณฑสถาน และกิจกรรมทางวัฒนธรรมอื่นๆ
+              </ion-option>
+              <ion-option [value]="42">
+                กิจกรรมการพนันและการเสี่ยงโชค 
+              </ion-option>
+              <ion-option [value]="43">
+                กิจกรรมด้านการกีฬา ความบันเทิงและนันทนาการ 
+              </ion-option>
+              <ion-option [value]="44">
+                กิจกรรมองค์การสมาชิก
+              </ion-option>
+              <ion-option [value]="45">
+                การซ่อมคอมพิวเตอร์และของใช้ส่วนบุคคลและของใช้ในครัวเรือน             
+                </ion-option>
+              <ion-option [value]="46">
+                กิจกรรมบริการส่วนบุคคลอืนๆ
+              </ion-option>
+              <ion-option [value]="47">
+                ศาสนสถาน
+              </ion-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item *ngIf="isValid('serviceTypeCode')">
+            <span class="invalid-msg">
+              กรุณาเลือก
+            </span>
+          </ion-item>
+
+      </ion-card-content>
+    </ion-card>
+
+    <ion-grid>
+      <ion-row align-items-center>
+        <ion-col col-3>
+          <button ion-button icon-only color="secondary" type="button">
+            <ion-icon name="rewind"></ion-icon>
+          </button>
+          <button ion-button icon-only color="secondary" type="button">
+            <ion-icon name="ios-arrow-back"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-3>
+          <div class="progress-outer">
+            <div class="progress-inner" [style.width]="100 + '%'">
+              30 / 30
+            </div>
+          </div>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button block type="submit">
+            บันทึก และ สิ้นสุดสัมภาษณ์
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

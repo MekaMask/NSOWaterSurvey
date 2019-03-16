@@ -1,0 +1,55 @@
+<ion-header>
+  <questionnaire-menu title="Population "></questionnaire-menu>
+</ion-header>
+
+<ion-content padding>
+
+  <h3>แบบสอบถามสำมะโนประชากรและเคหะ พ.ศ. 2563</h3>
+
+  <form (ngSubmit)="handleSubmit()" [formGroup]="f">
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>
+            จำนวนผู้อยู่อาศัย
+          </ion-label>
+        </ion-item>
+        <ion-item formControlName="personCount">
+          <ion-input type="number" placeholder="โปรดระบุ"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="isValid('personCount')">
+          <span class="invalid-msg">
+            กรุณากรอกจำนวน
+          </span>
+        </ion-item>
+        <ion-row text-center *ngIf="f.get('personCount').value > 0">
+          <ion-col>
+            <ion-row>
+              <ion-col col-2>
+                <b>ลำดับที่</b>
+              </ion-col>
+              <ion-col col-2>
+                <b>คำนำหน้าชื่อ</b>
+              </ion-col>
+              <ion-col col-4>
+                <b>ชื่อตัว</b>
+              </ion-col>
+              <ion-col col-4>
+                <b>ชื่อสกุล</b>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+
+        <div *ngIf="f.get('personCount').value > 0">
+          <div *ngFor="let far of f.get('persons').controls; let i = index">
+            <table-population [no]="i + 1" [FormItem]="far"></table-population>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <form-buttons-bar></form-buttons-bar>
+
+  </form>
+</ion-content>

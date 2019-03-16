@@ -1,0 +1,86 @@
+<ion-header>
+
+  <questionnaire-menu title="พืชไร่"></questionnaire-menu>
+
+</ion-header>
+
+<ion-content padding>
+  <form (ngSubmit)="handleSubmit()" [formGroup]="agronomyPlant">
+    <h3>ตอนที่ 2.2 พืชไร่</h3>
+    <ion-card>
+      <ion-card-content>
+        <dl>
+          <dd>
+            <b>พืชไร่</b>
+          </dd>
+          <dt>
+            เช่น กก ข้าวโพดเลี้ยงสัตว์(ถ้าเป็นข้าวโพดรับประทานให้ไปกรอกในตอนที่ 2.5) ข้าวฟ่าง งา ถั่วทุกชนิด ทานตะวัน
+            นุ่น ปอ ฝ้าย มันสำปะหลัง ยาสูบ ละหุ่ง ลูกเดือย สาคู แห้ว อ้อย สัปปะรด แตงโม กาแฟ เป็นต้น
+          </dt>
+        </dl>
+      </ion-card-content>
+
+    </ion-card>
+
+    <ion-card>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-label>
+              2.2.1 ในรอบ 12 เดือนที่ผ่านมาครัวเรือนนี้ได้ปลูก <b>พืชไร่</b> หรือไม่
+            </ion-label>
+          </ion-item>
+          <ion-row radio-group formControlName="doing" [class.invalid]="isValid('doing')">
+            <ion-item *ngIf="isValid('doing')">
+              <span class="invalid-msg">
+                กรุณาเลือก
+              </span>
+            </ion-item>
+            <ion-item col-6>
+              <ion-radio [value]="true" item-left></ion-radio>
+              <ion-label>
+                ปลูก
+              </ion-label>
+            </ion-item>
+            <ion-item col-6>
+              <ion-radio [value]="false" item-left></ion-radio>
+              <ion-label>
+                ไม่ปลูก
+              </ion-label>
+            </ion-item>
+
+          </ion-row>
+
+          <div *ngIf="agronomyPlant.get('doing').value">
+            <ion-item>
+              <ion-label>
+                2.2.2 ถ้า “ปลูก” มีพื้นที่ปลูก<b>พืชไร่</b>จำนวนกี่แปลง
+              </ion-label>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="number" placeholder="กรอกจำนวน" formControlName="fieldCount" [class.invalid]="isValid('fieldCount')"></ion-input>
+            </ion-item>
+
+            <ion-item *ngIf="isValid('fieldCount')">
+              <span class="invalid-msg">
+                กรุณากรอกจำนวน
+              </span>
+            </ion-item>
+          </div>
+
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <div *ngIf="agronomyPlant.get('fieldCount').value > 0 && agronomyPlant.get('doing').value">
+      <div *ngFor="let fdc of agronomyPlant.get('fields').controls;let i = index">
+        <field-dry-crop-planting [no]="i+1" [FormItem]="fdc"></field-dry-crop-planting>
+      </div>
+    </div>
+
+    <form-buttons-bar></form-buttons-bar>
+
+  </form>
+
+</ion-content>

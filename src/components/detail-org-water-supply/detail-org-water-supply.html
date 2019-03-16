@@ -1,0 +1,215 @@
+<!-- Generated template for the DetailOrgWaterSupplyComponent component -->
+<div [formGroup]="FormItem">
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>
+          <b> หน่วยงานที่ {{no}} </b>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          5.2 ชื่อหน่วยงาน
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="name" [class.invalid]="isValid('name')" type="text" placeholder="ชื่อหน่วยงาน"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="isValid('name')">
+        <span class="invalid-msg">
+          กรุณากรอกข้อมูล
+        </span>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label>
+          5.3 ใช้น้ำผิวดิน <b>(สระน้ำ แม่น้ำ/ลำคลอง) </b> หรือไม่
+        </ion-label>
+      </ion-item>
+
+      <ion-row radio-group formControlName="hasSurfaceWater" [class.invalid]="isValid('hasSurfaceWater')">
+
+        <ion-item *ngIf="isValid('hasSurfaceWater')">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item>
+        <ion-item col-6>
+          <ion-radio [value]="true" item-left></ion-radio>
+          <ion-label>
+            1. ใช้
+          </ion-label>
+        </ion-item>
+        <ion-item col-6>
+          <ion-radio [value]="false" item-left></ion-radio>
+          <ion-label>
+            2. ไม่ใช้
+          </ion-label>
+        </ion-item>
+      </ion-row>
+      <div *ngIf="FormItem.get('hasSurfaceWater').value ">
+        <ion-item>
+          <ion-label>
+            ถ้า "ใช้" ใช้น้ำผิวดินปริมาณเฉลี่ย ลูกบาศก์เมตร ต่อ เดือน เท่าไร
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-input formControlName="surfaceWaterPerMonth" [class.invalid]="isValid('surfaceWaterPerMonth')" type="text"
+            placeholder="กรอกจำนวนปริมาตร"></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="isValid('surfaceWaterPerMonth')">
+          <span class="invalid-msg">
+            กรุณากรอกข้อมูล
+          </span>
+        </ion-item>
+      </div>
+
+      <ion-item>
+        <ion-label>
+          5.4 ใช้น้ำจาก <b>บ่อบาดาล</b> หรือไม่
+        </ion-label>
+      </ion-item>
+
+      <ion-row radio-group formControlName="useGroundWater" [class.invalid]="isValid('useGroundWater')">
+
+        <ion-item *ngIf="isValid('useGroundWater')">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item>
+        <ion-item col-6>
+          <ion-radio [value]="true" item-left></ion-radio>
+          <ion-label>
+            1. ใช้
+          </ion-label>
+        </ion-item>
+        <ion-item col-6>
+          <ion-radio [value]="false" item-left></ion-radio>
+          <ion-label>
+            2. ไม่ใช้
+          </ion-label>
+        </ion-item>
+      </ion-row>
+
+      <div *ngIf="FormItem.get('useGroundWater').value ">
+        <ion-item>
+          <ion-label>
+            ใช้น้ำจากบ่อบาดาลกี่บ่อ
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-input formControlName="groundWaterCount" [class.invalid]="isValid('groundWaterCount')" type="text"
+            placeholder="กรอกจำนวนบ่อ"></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="isValid('groundWaterCount')">
+          <span class="invalid-msg">
+            กรุณากรอกข้อมูล
+          </span>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            ใช้น้ำบ่อบาดาลเฉลี่ย ลูกบาศก์เมตร ต่อ เดือน เท่าไร
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-input formControlName="groundWaterUsePerMonth" [class.invalid]="isValid('groundWaterUsePerMonth')" type="text"
+            placeholder="กรอกจำนวนปริมาตร"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="isValid('groundWaterUsePerMonth')">
+          <span class="invalid-msg">
+            กรุณากรอกข้อมูล
+          </span>
+        </ion-item>
+
+      </div>
+
+      <ion-item>
+        <ion-label>
+          5.5 น้ำประปาราคาขายหน่วยต่อเดือนเท่าไร
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-input formControlName="plumbingPrice" [class.invalid]="isValid('plumbingPrice')" type="text" placeholder="กรอกจำนวน"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="isValid('plumbingPrice')">
+        <span class="invalid-msg">
+          กรุณากรอกข้อมูล
+        </span>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          5.6 ค่าเช่ามิเตอร์คิดเดือนละเท่าไร
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-input formControlName="meterRentalFee" [class.invalid]="isValid('meterRentalFee')" type="text" placeholder="กรอกจำนวน"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="isValid('meterRentalFee')">
+        <span class="invalid-msg">
+          กรุณากรอกข้อมูล
+        </span>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label>
+          5.7 การผลิตน้ำประปา มีระบบการฆ่าโรคเชื้อหรือไม่
+        </ion-label>
+      </ion-item>
+
+      <ion-row radio-group formControlName="disinfection" [class.invalid]="isValid('disinfection')">
+
+        <ion-item *ngIf="isValid('disinfection')">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-radio [value]="1" item-left></ion-radio>
+          <ion-label>
+            1. มีการฆ่าเชื้อโรคโดยการใส่คลอรีน
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-radio [value]="2" item-left></ion-radio>
+          <ion-label>
+            2. มีด้วยวิธีอื่น
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-radio [value]="3" item-left></ion-radio>
+          <ion-label>
+            3. ไม่มีการฆ่าเชื้อโรค
+          </ion-label>
+        </ion-item>
+      </ion-row>
+
+      <div *ngIf="FormItem.get('disinfection').value == 2 ">
+        <ion-item>
+          <ion-label>
+            ระบุวิธีการฆ่าเชื้อ
+          </ion-label>
+          <ion-input type="text" [class.invalid]="isValid('otherDisinfection')" formControlName="otherDisinfection"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="isValid('otherDisinfection')" class="invalid-msg">
+          <span>
+            กรุณากรอกข้อมูล
+          </span>
+        </ion-item>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+</div>

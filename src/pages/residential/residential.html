@@ -1,0 +1,78 @@
+<ion-header>
+
+  <questionnaire-menu title="ครัวเรือนอยู่อาศัย "></questionnaire-menu>
+
+</ion-header>
+
+<ion-content padding>
+  <form (ngSubmit)="handleSubmit()" [formGroup]="residentialFrm">
+    <h3>ตอนที่ 1 ครัวเรือนอยู่อาศัย</h3>
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>
+            1.1 จำนวนสมาชิกในครัวเรือนที่<b>อยู่ประจำ</b>ติดต่อกัน<br>ตั้งแต่ 3 เดือนขึ้นไปมีกี่คน
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-input class="backgroundinput" type="number" placeholder="จำนวนคน" formControlName="memberCount"
+            [class.invalid]="isValid('memberCount')"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="isValid('memberCount')">
+          <span class="invalid-msg">
+            กรุณากรอกจำนวน
+          </span>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            1.2 คนที่อายุ 15 – 59 ปี มีกี่คน
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-input class="backgroundinput" type="number" placeholder="จำนวนคน" formControlName="workingAge"
+            [class.invalid]="isValid('workingAge')"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="isValid('workingAge')">
+          <span class="invalid-msg">
+            กรุณากรอกจำนวน
+          </span>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <water-sources8-b [headline]="'1.3 ครัวเรือนนี้ใช้น้ำเพื่อการอุปโภคบริโภค จากแหล่งใดบ้าง'" [FormItem]="residentialFrm.get('waterSources')"></water-sources8-b>
+
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>
+            1.4 ครัวเรือนนี้มีการใช้น้ำเพื่อรดน้ำต้นไม้/สวนหย่อม/สวนครัว<br>ในบริเวณที่อยู่อาศัยหรือไม่
+          </ion-label>
+        </ion-item>
+        <ion-row radio-group formControlName="gardeningUse" [class.invalid]="isValid('gardeningUse')">
+          <ion-item *ngIf="isValid('gardeningUse')">
+            <span class="invalid-msg">
+              กรุณาเลือก
+            </span>
+          </ion-item>
+          <ion-item col-6>
+            <ion-label>
+              ใช้
+            </ion-label>
+            <ion-radio value="true" item-left></ion-radio>
+          </ion-item>
+          <ion-item col-6>
+            <ion-label>
+              ไม่ใช้
+            </ion-label>
+            <ion-radio value="false" item-left></ion-radio>
+          </ion-item>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+
+    <form-buttons-bar></form-buttons-bar>
+
+  </form>
+</ion-content>

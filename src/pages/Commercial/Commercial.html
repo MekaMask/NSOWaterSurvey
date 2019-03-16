@@ -1,0 +1,334 @@
+<ion-header>
+
+    <questionnaire-menu title="การค้าและการบริการ"></questionnaire-menu>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <form (ngSubmit)="handleSubmit()" [formGroup]="f">
+
+        <h3>ตอนที่ 4 การค้าและการบริการ</h3>
+
+        <ion-card>
+            <ion-card-content>
+
+                <ion-item>
+                    <ion-label>
+                        4.1 ชื่อสถานประกอบการ/หน่วยงาน
+                    </ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-input class="backgroundinput" type="text" placeholder="กรอกชื่อ" formControlName="name"
+                        [class.invalid]="isValid('name')"></ion-input>
+                </ion-item>
+                <ion-item *ngIf="isValid('name')">
+                    <span class="invalid-msg">
+                        กรุณากรอก
+                    </span>
+                </ion-item>
+                <ion-item>
+                    <ion-label>
+                        4.2 สถานประกอบการแห่งนี้ให้บริการในลักษณะใด<br> (ระบุบริการหลักที่ทำ)
+                    </ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-input class="backgroundinput" type="text" placeholder="กรอกลักษณะการให้บริการ" formControlName="serviceType"
+                        [class.invalid]="isValid('serviceType')"></ion-input>
+                </ion-item>
+                <ion-item *ngIf="isValid('serviceType')">
+                    <span class="invalid-msg">
+                        กรุณากรอก
+                    </span>
+                </ion-item>
+                <ion-item>
+                    <ion-label>
+                        4.3 ประเภทบ้าน/อาคาร/สิ่งปลูกสร้าง
+                    </ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-label>
+                        เลือกประเภท
+                    </ion-label>
+                  
+                    <ion-select formControlName="buildingCode" disabled="true" interface="action-sheet">
+                        <ion-option [value]="1">
+                            1.บ้านเดี่ยว
+                        </ion-option>
+                        <ion-option [value]="2">
+                            2.บ้านแฝด/ทาวน์เฮ้า/ทาวน์โฮม
+                        </ion-option>
+                        <ion-option [value]="3">
+                            3.ห้องแถว/เรือนแถว/ตึกแถว
+                        </ion-option>
+                        <ion-option [value]="4">
+                            4.อาคารสูง/คอนโด/แมนชั่น
+                        </ion-option>
+                        <ion-option [value]="5">
+                            5.อาคารสำนักงานเอกชน
+                        </ion-option>
+                        <ion-option [value]="6">
+                            6.โรงแรม/รีสอร์ท/เกสเฮ้าส์
+                        </ion-option>
+                        <ion-option [value]="7">
+                            7.สถานพยาบาล:ภาครัฐ
+                        </ion-option>
+                        <ion-option [value]="8">
+                            8.สถานพยาบาล:ภาคเอกชน
+                        </ion-option>
+                        <ion-option [value]="9">
+                            9.สถานที่ราชการ/รัฐวิสหกิจ
+                        </ion-option>
+                        <ion-option [value]="10">
+                            10.ศาสนสถาน
+                        </ion-option>
+                        <ion-option [value]="11">
+                            11.สถานศึกษา : ภาครัฐ
+                        </ion-option>
+                        <ion-option [value]="12">
+                            12.สถานศึกษา : เอกชน
+                        </ion-option>
+                        <ion-option [value]="13">
+                            13.โกดังโรงงาน
+                        </ion-option>
+                        <ion-option [value]="14">
+                            14.โรงเรือนเพราะปลูก/เลี้ยงสัตว์
+                        </ion-option>
+                        <ion-option [value]="15">
+                            15.อาคารกำลังก่อสร้าง
+                        </ion-option>
+                        <ion-option [value]="16">
+                            16.อื่นๆ
+                        </ion-option>
+                    </ion-select>                   
+                </ion-item>
+
+            </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+            <ion-card-header>
+                4.4 (1) สถานศึกษา/โรงเรียน/สถาบันการศึกษา
+            </ion-card-header>
+            <ion-card-content>
+                <div formGroupName="questionForAcademy">
+                    <ion-list>
+                        <ion-label>
+                            1) โรงเรียน/สถาบันการศึกษาแห่งนี้เปิดสอนนักเรียน/นักศึกษา ระดับใดบ้าง<br>
+                            2) มีจำนวนนักเรียน/นักศึกษากี่คน
+                        </ion-label>
+                    </ion-list>
+                    <ion-list>
+                        <table-check-item-count unit="คน" [ititle]="'1. ก่อนวัยเรียน'" [FormItem]="f.get('questionForAcademy.preSchool')"></table-check-item-count>
+                        <table-check-item-count unit="คน" [ititle]="'2. อนุบาล'" [FormItem]="f.get('questionForAcademy.kindergarten')"></table-check-item-count>
+                        <table-check-item-count unit="คน" [ititle]="'3. ประถมศึกษา'" [FormItem]="f.get('questionForAcademy.primarySchool')"></table-check-item-count>
+                        <table-check-item-count unit="คน" [ititle]="'4. มัธยมศึกษา'" [FormItem]="f.get('questionForAcademy.highSchool')"></table-check-item-count>
+                        <table-check-item-count unit="คน" [ititle]="'5. ปวช./ปวส.'" [FormItem]="f.get('questionForAcademy.vocational')"></table-check-item-count>
+                        <table-check-item-count unit="คน" [ititle]="'6. อุดมศึกษา'" [FormItem]="f.get('questionForAcademy.higherEducation')"></table-check-item-count>
+                    </ion-list>
+                    <ion-item>
+                        <ion-label>
+                            3) มีจำนวนบุคลากรรวมทั้งหมดทุกประเภทกี่คน<br> (รวมครู, นักวิชาการ, พนักงาน, ภารโรง, ฯลฯ)
+                        </ion-label>
+                    </ion-item>
+                
+                    <ion-item>
+                        <ion-input class="backgroundinput" type="number" placeholder="กรอกจำนวน" formControlName="personnelCount"
+                            [class.invalid]="isValid('questionForAcademy.personnelCount')"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="isValid('questionForAcademy.personnelCount')">
+                        <span class="invalid-msg">
+                            กรุณากรอก
+                        </span>
+                    </ion-item>
+                </div>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+            <ion-card-header>
+                4.4 (2) โรงแรม/รีสอร์ท/เกสต์เฮาส์
+            </ion-card-header>
+            <ion-card-content>
+                <div formGroupName="hotelsAndResorts">
+                    <ion-item>
+                        <ion-label>
+                            1) มีจำนวนห้องพักรวมทั้งหมดกี่ห้อง
+                        </ion-label>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-input class="backgroundinput" type="number" placeholder="กรอกจำนวน" formControlName="roomCount"
+                            [class.invalid]="isValid('hotelsAndResorts.roomCount')"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="isValid('hotelsAndResorts.roomCount')">
+                        <span class="invalid-msg">
+                            กรุณากรอก
+                        </span>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>
+                            2) มีจำนวนบุคลากรรวมทั้งหมดทุกประเภทกี่คน
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input class="backgroundinput" type="number" placeholder="กรอกจำนวน" formControlName="personnelCount"
+                            [class.invalid]="isValid('hotelsAndResorts.personnelCount')"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="isValid('hotelsAndResorts.personnelCount')">
+                        <span class="invalid-msg">
+                            กรุณากรอก
+                        </span>
+                    </ion-item>
+                </div>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+            <ion-card-header>
+                4.4 (3) สถานพยาบาล/โรงพยาบาล/สถานสงเคราะห์
+            </ion-card-header>
+            <ion-card-content>
+                <div formGroupName="hospital">
+                    <ion-item>
+                        <ion-label>
+                            1) มีจำนวนเตียงพักค้างคืน (ผู้ป่วยใน) รวมทั้งหมดกี่เตียง
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input class="backgroundinput" type="number" placeholder="กรอกจำนวน" formControlName="bedCount"
+                            [class.invalid]="isValid('hospital.bedCount')"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="isValid('hospital.bedCount')">
+                        <span class="invalid-msg">
+                            กรุณากรอก
+                        </span>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>
+                            2) มีจำนวนบุคลากรรวมทั้งหมดทุกประเภทกี่คน<br> (หมอ,พยาบาล,ผู้ช่วยพยาบาล,เจ้าหน้าที่, ฯลฯ)
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input class="backgroundinput" type="number" placeholder="กรอกจำนวน" formControlName="personnelCount"
+                            [class.invalid]="isValid('hospital.personnelCount')"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="isValid('hospital.personnelCount')">
+                        <span class="invalid-msg">
+                            กรุณากรอก
+                        </span>
+                    </ion-item>
+                </div>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+            <ion-card-header>
+                4.4 (4) คอนโด/อพาร์ทเม้นต์/หอพัก/แมนชั่น/แฟลต
+            </ion-card-header>
+            <ion-card-content>
+                <div formGroupName="building">
+                    <ion-item>
+                        <ion-label>
+                            1) จำนวนห้องรวมทั้งหมดมีกี่ห้อง
+                        </ion-label>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-input class="backgroundinput" type="number" placeholder="กรอกจำนวน" formControlName="roomCount"
+                            [class.invalid]="isValid('building.roomCount')"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="isValid('building.roomCount')">
+                        <span class="invalid-msg">
+                            กรุณากรอก
+                        </span>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>
+                            2) จำนวนห้องที่มีผู้อยู่อาศัยมีกี่ห้อง (ณ วันที่สำรวจ)
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input class="backgroundinput" type="number" placeholder="กรอกจำนวน" formControlName="occupiedRoomCount"
+                            [class.invalid]="isValid('building.occupiedRoomCount')"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="isValid('building.occupiedRoomCount')">
+                        <span class="invalid-msg">
+                            กรุณากรอก
+                        </span>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>
+                            3) มีจำนวนบุคลากรรวมทั้งหมดทุกประเภทกี่คน <br>(ผู้จัดการ,แม่บ้าน,คนสวน,รปภ., ฯลฯ)
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input class="backgroundinput" type="number" placeholder="กรอกจำนวน" formControlName="personnelCount"
+                            [class.invalid]="isValid('building.personnelCount')"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="isValid('building.personnelCount')">
+                        <span class="invalid-msg">
+                            กรุณากรอก
+                        </span>
+                    </ion-item>
+                </div>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+            <ion-card-header>
+                4.4 (5) ศาสนสถาน/วัด/สำนักสงฆ์/สำนักปฏิบัติธรรม
+            </ion-card-header>
+            <ion-card-content>
+                <div formGroupName="religious">
+                    <ion-item>
+                        <ion-label>
+                            1) มีจำนวนพระสงฆ์ สามเณร ชี เด็กวัด ผู้มาประกอบศาสนกิจ<br> ผู้ปฏิบัติธรรม
+                            โดยเฉลี่ยต่อเดือนกี่คน
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input class="backgroundinput" type="number" placeholder="กรอกจำนวน" formControlName="peopleCount"
+                            [class.invalid]="isValid('religious.peopleCount')"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="isValid('religious.peopleCount')">
+                        <span class="invalid-msg">
+                            กรุณากรอก
+                        </span>
+                    </ion-item>
+                </div>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+            <ion-card-header>
+                4.4 (6) สถานประกอบการบริการประเภทอื่นๆ <br>หรือรหัสประเภทบ้าน /อาคาร /สิ่งปลูกสร้างอื่นๆในข้อ 4.6<br>
+                (เช่น ร้านค้า ร้านขายของชำ ร้านเสริมสวย เป็นต้น)
+            </ion-card-header>
+            <ion-card-content>
+                <div formGroupName="otherBuilding">
+                    <ion-item>
+                        <ion-label>
+                            1) มีจำนวนบุคลากร/คนทำงานรวมทั้งหมดกี่คน
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input class="backgroundinput" type="number" placeholder="กรอกจำนวน" formControlName="personnelCount"
+                            [class.invalid]="isValid('otherBuilding.personnelCount')"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="isValid('otherBuilding.personnelCount')">
+                        <span class="invalid-msg">
+                            กรุณากรอก
+                        </span>
+                    </ion-item>
+                </div>
+            </ion-card-content>
+        </ion-card>
+
+
+        <water-sources8-b headline="4.5 สถานประกอบการแห่งนี้ใช้น้ำจากแหล่งใดบ้าง" [FormItem]="f.get('waterSources')"></water-sources8-b>
+
+        <form-buttons-bar></form-buttons-bar>
+    </form>
+</ion-content>

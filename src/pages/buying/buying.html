@@ -1,0 +1,68 @@
+<ion-header>
+
+  <questionnaire-menu title="น้ำที่ซื้อมาใช้"></questionnaire-menu>
+
+</ion-header>
+
+<ion-content padding>
+
+  <h3>5.7 น้ำที่ซื้อมาใช้</h3>
+  <ion-card>
+    <ion-card-content>
+
+      <ion-item>
+        <ion-label>
+          5.7.1 น้ำที่ซื้อมาใช้ มีบรรจุภัณฑ์ชนิดใดบ้าง มีขนาดบรรจุเท่าใด
+          <br> และโดยเฉลี่ยต่อเดือนแล้ว ซื้อมาเพื่อใช้ในแต่ละกิจกรรม
+          <br> เป็นจำนวนเท่าไร
+        </ion-label>
+      </ion-item>
+
+      <ion-row text-center align-items-center>
+        <ion-col col-5>
+          <ion-row>
+            <ion-col col-7>
+              <br><b>ชนิด</b>
+            </ion-col>
+            <ion-col>
+              <b>ขนาด</b><br><b>บรรจุภัณฑ์</b>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col col-7>
+          <ion-row>
+            <ion-col>
+              <ion-label>
+                <b>จำนวนที่ซื้อต่อเดือน</b>
+              </ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              เพื่ออุปโภค<br>บริโภค
+            </ion-col>
+            <ion-col>
+              เพื่อทำ<br>การเกษตร
+            </ion-col>
+            <ion-col>
+              เพื่อผลิต<br>สินค้า
+            </ion-col>
+            <ion-col>
+              เพื่อการ<br>บริการ
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <table-buying headline="1. ขวด" size="มิลลิลิตร" [FormItem]="BuyingForm.get('package').at(0)"></table-buying>
+      <table-buying headline="2. ถัง" [FormItem]="BuyingForm.get('package').at(1)"></table-buying>
+      <table-buying headline="3. แทงค์" [FormItem]="BuyingForm.get('package').at(2)"></table-buying>
+      <table-buying headline="4. รถ" [FormItem]="BuyingForm.get('package').at(3)"></table-buying>
+      <table-buying-other [FormItem]="BuyingForm.get('package').at(4)"></table-buying-other>
+
+    </ion-card-content>
+  </ion-card>
+
+  <form-buttons-bar></form-buttons-bar>
+
+</ion-content>

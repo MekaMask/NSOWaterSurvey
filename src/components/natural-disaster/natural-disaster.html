@@ -1,0 +1,76 @@
+<!-- Generated template for the NaturalDisasterComponent component -->
+<div [formGroup]="FormItem">
+
+    <ion-row  [class.invalid]="isValid('anycheck')">
+
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            2.1 ภัยจากคลื่นสึนามิ
+          </ion-label>
+          <ion-checkbox formControlName="tsunami"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            2.2 อุทกภัย ดินโคลนถล่ม
+          </ion-label>
+          <ion-checkbox formControlName="landSlide"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            2.3 ภัยจากแผ่นดินไหวและอาคารถล่ม
+          </ion-label>
+          <ion-checkbox formControlName="earthquake"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            2.4 พายุหมุนเขตร้อน
+          </ion-label>
+          <ion-checkbox formControlName="cyclone"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            2.5 ภัยจากไฟป่าและหมอกควัน
+          </ion-label>
+          <ion-checkbox formControlName="forestFire"></ion-checkbox>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            2.6 ภัยแล้ง
+          </ion-label>
+          <ion-checkbox formControlName="drought"></ion-checkbox>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            2.7 ภัยจากอากาศหนาว
+          </ion-label>
+          <ion-checkbox formControlName="cold"></ion-checkbox>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            2.8 ภัยจากโรคระบาดในมนุษย์
+          </ion-label>
+          <ion-checkbox formControlName="epidemic"></ion-checkbox>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            2.9 ภัยจากโรค แมลง สัตว์ ศัตรูพืชระบาด
+          </ion-label>
+          <ion-checkbox formControlName="pest"></ion-checkbox>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            2.10 ภัยจากโรคระบาดสัตว์และสัตว์น้ำ
+          </ion-label>
+          <ion-checkbox formControlName="epizootics"></ion-checkbox>
+        </ion-item>
+
+      </ion-col>
+    </ion-row>
+  
+</div>

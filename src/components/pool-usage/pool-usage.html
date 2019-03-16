@@ -1,0 +1,120 @@
+<div [formGroup]="FormItem">
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>
+          <b>สระที่ {{ no }}</b>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          1) ใช้น้ำปริมาณเท่าไรต่อเดือนโดยเฉลี่ย
+        </ion-label>
+      </ion-item>
+
+      <ion-row radio-group formControlName="hasCubicMeterPerMonth" [class.invalid]="isValid('hasCubicMeterPerMonth')">
+        <ion-item *ngIf="isValid('hasCubicMeterPerMonth')">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item>
+
+        <ion-item col-12>
+          <ion-radio [value]="true" item-left></ion-radio>
+          <ion-label>
+            ทราบปริมาณน้ำ
+          </ion-label>
+        </ion-item>
+        <ion-item col-12>
+          <ion-radio [value]="false" item-left></ion-radio>
+          <ion-label>
+            ไม่ทราบ
+          </ion-label>
+        </ion-item>
+      </ion-row>
+
+
+      <div [ngSwitch]="FormItem.get('hasCubicMeterPerMonth').value">
+        <div *ngSwitchCase="true">
+          <ion-item>
+            <ion-label>
+              ปริมาณน้ำ (ลบ.ม./เดือน)
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-input formControlName="cubicMeterPerMonth" placeholder="กรอกปริมาณน้ำ" [class.invalid]="isValid('cubicMeterPerMonth')"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="isValid('cubicMeterPerMonth')">
+            <span class="invalid-msg">
+              กรุณากรอก
+            </span>
+          </ion-item>
+        </div>
+      </div>
+
+
+      
+      <ion-item>
+        <ion-label>
+          2) ใช้เครื่องสูบน้ำเพื่อสูบน้ำหรือไม่
+        </ion-label>
+      </ion-item>
+                <ion-row radio-group formControlName="hasPump" [class.invalid]="isValid('hasPump')">
+                  <ion-item *ngIf="isValid('hasPump')">
+                    <span class="invalid-msg">
+                      กรุณาเลือก
+                    </span>
+                  </ion-item>
+        <ion-item col-6>
+          <ion-radio [value]="true" item-left></ion-radio>
+          <ion-label>
+            ใช้
+          </ion-label>
+        </ion-item>
+        <ion-item col-6>
+          <ion-radio [value]="false" item-left></ion-radio>
+          <ion-label>
+            ไม่ใช้
+          </ion-label>
+        </ion-item>
+
+      </ion-row>
+
+      <div [ngSwitch]="FormItem.get('hasPump').value">
+        <div *ngSwitchCase="true">
+          <ion-item>
+            <ion-label>
+              3) สระนี้ใช้เครื่องสูบน้ำกี่เครื่อง
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-input type="number" formControlName="pumpCount" placeholder="กรอกจำนวนเครื่องสูบน้ำ" [class.invalid]="isValid('pumpCount')"></ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="isValid('pumpCount')">
+            <span class="invalid-msg">
+              กรุณากรอก
+            </span>
+          </ion-item>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+
+
+  <div *ngIf="FormItem.get('hasPump').value && FormItem.get('pumpCount').value > 0">
+    <div *ngFor="let p of FormItem.get('pumps').controls; let i = index">
+      <pump [no]="i + 1" [FormItem]="p"></pump>
+    </div>
+  </div>
+
+  <ion-card>
+    <ion-card-content>
+      <water-activity6 headline="5) ใช้น้ำจากสระนี้เพื่อทำกิจกรรมใดบ้างคิดเป็นสัดส่วนเท่าไร" [FormItem]="FormItem.get('waterActivities')"></water-activity6>
+      <water-problem4 headline="6) มีปัญหาคุณภาพน้้า หรือไม่" [FormItem]="FormItem.get('qualityProblem')"></water-problem4>
+    </ion-card-content>
+  </ion-card>
+
+</div>

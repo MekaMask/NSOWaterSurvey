@@ -1,0 +1,129 @@
+<ion-card [formGroup]="FormItem">
+  <ion-card-content>
+    <ion-item>
+      <ion-label>
+        <b>แปลงที่ {{ fieldNo }}</b>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        1) ตั้งอยู่ที่ใด (จังหวัด อำเภอ ตำบล)
+      </ion-label>
+    </ion-item>
+
+    <location [FormItem]="FormItem.get('location')"></location>
+
+    <ion-item>
+      <ion-label>
+        2) ขนาดพื้นที่เท่าไร กี่ไร่ กี่งาน กี่ตารางวา
+      </ion-label>
+    </ion-item>
+    <!-- do -->
+    <field-area [FormItem]="FormItem.get('area')"></field-area>
+
+
+    <ion-item>
+      <ion-label>
+        3) ในรอบ 12 เดือนที่ผ่านมาใช้พื้นที่นี้ทำนากี่ครั้ง (ไม่เกิน 4 ครั้ง)
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number" placeholder="กรอกจำนวน" formControlName="plantingCount" [class.invalid]="isValid('plantingCount')"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="isValid('plantingCount')">
+      <span class="invalid-msg">
+        กรุณากรอกจำนวน
+      </span>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        4) แต่ละครั้งทำกี่ไร่
+      </ion-label>
+    </ion-item>
+
+    <ion-row radio-group formControlName="plantingArea" [class.invalid]="isValid('plantingArea')">
+      <ion-item *ngIf="isValid('plantingArea')">
+        <span class="invalid-msg">กรุณาเลือก</span>
+      </ion-item>
+      <ion-item>
+        <ion-radio value="1" item-left></ion-radio>
+        <ion-label>
+          ทำทั้งแปลงทุกครั้ง
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-radio value="2" item-left></ion-radio>
+        <ion-label>
+          ไม่ได้ทำทั้งแปลง แต่ทำ<b>เท่ากัน</b>ทุกครั้ง
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-radio value="3" item-left></ion-radio>
+        <ion-label>
+          ไม่ได้ทำทั้งแปลง และทำ<b>ไม่เท่ากัน</b>ทุกครั้ง
+        </ion-label>
+      </ion-item>
+    </ion-row>
+
+    <div [ngSwitch]="FormItem.get('plantingArea').value">
+      <div *ngSwitchCase="2">
+        <ion-item>
+          <ion-label>
+            ทำเท่ากันทุกแปลง
+          </ion-label>
+        </ion-item>
+        <field-area [FormItem]="FormItem.get('areaUsed').at(0)"></field-area>
+      </div>
+      <div *ngSwitchCase="3">
+        <ion-item>
+          <ion-label>
+            ไม่ได้ทำเท่ากันทุกครั้ง
+          </ion-label>
+        </ion-item>
+        <div *ngFor="let far of FormItem.get('areaUsed').controls; let i = index">
+          <field-area headline="ครั้งที่ {{ i + 1 }} " [FormItem]="far"></field-area>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="FormItem.get('plantingCount').value > 0">
+      <div *ngFor="let har of FormItem.get('harvests').controls; let i = index">
+        <!-- do -->
+        <field-rice-harvest [FormItem]="har" [i]="i + 1"></field-rice-harvest>
+      </div>
+    </div>
+
+   
+        <ion-item>
+          <ion-label>
+            8) นาแปลงนี้ตั้งอยู่ในเขตชลประทานหรือไม่
+          </ion-label>
+        </ion-item>
+        <ion-row radio-group formControlName="irrigationField" [class.invalid]="isValid('irrigationField')">
+          <ion-item *ngIf="isValid('irrigationField')">
+            <span class="invalid-msg">
+              กรุณาเลือก
+            </span>
+          </ion-item>
+          <ion-item col-6>
+            <ion-radio [value]="true" item-left></ion-radio>
+            <ion-label>
+              1. อยู่
+            </ion-label>
+          </ion-item>
+          <ion-item col-6>
+            <ion-radio [value]="false" item-left></ion-radio>
+            <ion-label>
+              2. ไม่อยู่
+            </ion-label>
+          </ion-item>
+        </ion-row>
+    
+    <!-- do -->
+    <water-sources8-a headline="9) นาแปลงนี้ใช้น้ำจากแหล่งใดบ้าง(เลือกได้หลายข้อ)" [FormItem]="FormItem.get('waterSources')"></water-sources8-a>
+
+  </ion-card-content>
+</ion-card>

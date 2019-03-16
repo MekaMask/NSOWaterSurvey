@@ -1,0 +1,71 @@
+<ion-card>
+  <ion-card-content>
+    <div [formGroup]="FormItem" [class.invalid]="isValid('anycheck')">
+      <ion-item>
+        <ion-label>
+          {{text}}
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          1. น้ำประปา
+        </ion-label>
+        <ion-checkbox formControlName="plumbing"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          2. น้ำบาดาล
+        </ion-label>
+        <ion-checkbox formControlName="underGround"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          3. น้ำจากสระน้ำ
+        </ion-label>
+        <ion-checkbox formControlName="pool"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          4. น้ำจากแม่น้ำ/ลำคลอง/แหล่งน้ำสาธารณะ
+        </ion-label>
+        <ion-checkbox formControlName="river"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          5. น้ำจากชลประทาน
+        </ion-label>
+        <ion-checkbox formControlName="irrigation"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          6. น้ำฝนที่กักเก็บไว้
+        </ion-label>
+        <ion-checkbox formControlName="rain"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          7. น้ำที่ซื้อมาใช้
+        </ion-label>
+        <ion-checkbox formControlName="buying"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          8. อื่น ๆ
+        </ion-label>
+        <ion-checkbox formControlName="hasOther"></ion-checkbox>
+      </ion-item>
+
+      <ion-item *ngIf="FormItem.get('hasOther').value || false">
+        <ion-label>
+          โปรดระบุ
+        </ion-label>
+        <ion-input [class.invalid]="isValid('other')" formControlName="other"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="isValid('other')" class="invalid-msg">
+        <span>
+          กรุณากรอกข้อมูล
+        </span>
+      </ion-item>
+    </div>
+  </ion-card-content>
+</ion-card>

@@ -1,0 +1,10 @@
+<ion-list [formGroup]="FormItem">
+  <div *ngFor="let p of FormItem.get('plants').value; let i = index"  text-center>
+    <span >
+      {{p.code}} {{p.name}}
+    </span>
+  </div>
+</ion-list>
+<ion-item>
+  <ion-label ion-button (click)="model()">เลือก</ion-label>
+</ion-item>

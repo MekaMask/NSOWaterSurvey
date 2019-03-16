@@ -1,0 +1,93 @@
+<ion-card [formGroup]="FormItem">
+  <ion-card-content>
+
+    
+
+      <ion-item>
+        <ion-label>
+          {{ text }} {{ no }}
+        </ion-label>
+      </ion-item>
+
+      <div radio-group formControlName="shape" [class.invalid]="isValid('shape')">
+        <ion-item>
+          <ion-label>ทราบพื้นที่ ไร่ งาน ตารางวา <br>ความลึกของ{{ poolText }}</ion-label>
+          <ion-radio value="1" item-left></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>ไม่ทราบพื้นที่ ถ้า{{ poolText }}เป็นสี่เหลี่ยม </ion-label>
+          <ion-radio value="2" item-left></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>ไม่ทราบพื้นที่ ถ้า{{ poolText }}เป็นวงกลม </ion-label>
+          <ion-radio value="3" item-left></ion-radio>
+        </ion-item>
+        <ion-item *ngIf="isValid('shape')">
+          <span class="invalid-msg">กรุณาเลือกลักษณะของ{{ poolText }}</span>
+        </ion-item>
+      </div>
+
+      <div [ngSwitch]="FormItem.get('shape').value">
+
+        <div *ngSwitchCase="1">
+          <field-area [FormItem]="FormItem.get('area')"></field-area>
+        </div>
+
+        <div *ngSwitchCase="2" formGroupName="rectangle">
+          <!-- <div (ionChange)="showModalArea()"> -->
+              <!-- formGroupName="rectangle" -->
+          <ion-row  (click)="showModal()">
+            <ion-col col-6>
+              <ion-item>
+                <ion-label>ความกว้าง (เมตร)</ion-label>
+                <ion-input type="number" disabled="true" formControlName="width" [class.invalid]="isValid('rectangle.width')"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="isValid('rectangle.width')">
+                  <span class="invalid-msg">กรุณากรอกขนาดเส้นผ่านศูนย์กลาง</span>
+                </ion-item>
+            
+            </ion-col>
+            <ion-col col-6>
+              <ion-item>
+                <ion-label>ความยาว (เมตร)</ion-label>
+                <ion-input type="number" disabled="true" formControlName="length" [class.invalid]="isValid('rectangle.length')"></ion-input>
+                <ion-icon name="create" item-end></ion-icon>
+              </ion-item>
+              <ion-item *ngIf="isValid('rectangle.length')">
+                  <span class="invalid-msg">กรุณากรอกขนาดเส้นผ่านศูนย์กลาง</span>
+                </ion-item>
+             
+            </ion-col>
+          </ion-row>
+          <!-- </div> -->
+        </div>
+
+        <div *ngSwitchCase="3">
+          <ion-item>
+            <ion-label>เส้นผ่านศูนย์กลาง กี่เมตร</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-input type="number" formControlName="diameter" [class.invalid]="isValid('diameter')"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="isValid('diameter')">
+            <span class="invalid-msg">กรุณากรอกขนาดเส้นผ่านศูนย์กลาง</span>
+          </ion-item>
+        </div>
+
+      </div>
+
+      <div *ngIf="FormItem.get('shape').value">
+        <ion-item>
+          <ion-label>ความลึก กี่เมตร</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-input type="number" formControlName="depth" [class.invalid]="isValid('depth')"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="isValid('depth')">
+          <span class="invalid-msg">กรุณากรอกความลึก</span>
+        </ion-item>
+      </div>
+
+
+  </ion-card-content>
+</ion-card>

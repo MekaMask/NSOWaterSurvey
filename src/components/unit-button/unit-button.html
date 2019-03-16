@@ -1,0 +1,23 @@
+{{testData}}
+<div [formGroup]="FormItem">
+
+  <button padding (click)="showModal()">
+
+    <ion-label>
+      ห้องที่ {{FormItem.get('subUnit.roomNumber').value}}
+    </ion-label>
+
+    <div *ngIf="FormItem.get('subUnit.access').invalid" text-center class="start"></div>
+
+    <div *ngIf="FormItem.get('subUnit.access').value == 1">
+      <div *ngIf="FormItem.valid" text-center class="done"></div>
+      <div *ngIf="FormItem.invalid" text-center class="pause"></div>
+    </div>
+    <div *ngIf="FormItem.get('subUnit.access').value == 2" text-center class="return"></div>
+    <div *ngIf="FormItem.get('subUnit.access').value == 3" text-center class="return"></div>
+    <div *ngIf="FormItem.get('subUnit.access').value == 4" text-center class="done"></div>
+    <div *ngIf="FormItem.get('subUnit.access').value == 5" text-center class="done"></div>
+
+  </button>
+
+</div>

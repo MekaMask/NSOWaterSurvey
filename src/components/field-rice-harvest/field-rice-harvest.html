@@ -1,0 +1,162 @@
+<ion-card [formGroup]="FormItem">
+  <ion-card-header>
+    ทำนาครั้งที่ {{ text }}
+  </ion-card-header>
+  <ion-card-content>
+    <ion-item>
+      <ion-label>
+        5.1) การทำนาครั้งที่ {{ text }} เริ่มทำนาเดือนไหนถึงเดือนไหน
+      </ion-label>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            ครั้งที่ {{ text }} เริ่ม
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            เดือน
+          </ion-label>
+
+          <ion-select interface="action-sheet" formControlName="plantingFromMonth" [class.invalid]="isValid('plantingFromMonth')">
+            <ion-option [value]=1>
+              1 - มกราคม
+            </ion-option>
+            <ion-option [value]=2>
+              2 - กุมภาพันธ์
+            </ion-option>
+            <ion-option [value]=3>
+              3 - มีนาคม
+            </ion-option>
+            <ion-option [value]=4>
+              4 - เมษายน
+            </ion-option>
+            <ion-option [value]=5>
+              5 - พฤษภาคม
+            </ion-option>
+            <ion-option [value]=6>
+              6 - มิถุนายน
+            </ion-option>
+            <ion-option [value]=7>
+              7 - กรกฎาคม
+            </ion-option>
+            <ion-option [value]=8>
+              8 - สิงหาคม
+            </ion-option>
+            <ion-option [value]=9>
+              9 - กันยายน
+            </ion-option>
+            <ion-option [value]=10>
+              10 - ตุลาคม
+            </ion-option>
+            <ion-option [value]=11>
+              11 - พฤศจิกายน
+            </ion-option>
+            <ion-option [value]=12>
+              12 - ธันวาคม
+            </ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="isValid('plantingFromMonth')">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            ถึง
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            เดือน
+          </ion-label>
+          <ion-select interface="action-sheet" formControlName="plantingThruMonth" [class.invalid]="isValid('plantingThruMonth')">
+            <ion-option [value]=1>
+              1 - มกราคม
+            </ion-option>
+            <ion-option [value]=2>
+              2 - กุมภาพันธ์
+            </ion-option>
+            <ion-option [value]=3>
+              3 - มีนาคม
+            </ion-option>
+            <ion-option [value]=4>
+              4 - เมษายน
+            </ion-option>
+            <ion-option [value]=5>
+              5 - พฤษภาคม
+            </ion-option>
+            <ion-option [value]=6>
+              6 - มิถุนายน
+            </ion-option>
+            <ion-option [value]=7>
+              7 - กรกฎาคม
+            </ion-option>
+            <ion-option [value]=8>
+              8 - สิงหาคม
+            </ion-option>
+            <ion-option [value]=9>
+              9 - กันยายน
+            </ion-option>
+            <ion-option [value]=10>
+              10 - ตุลาคม
+            </ion-option>
+            <ion-option [value]=11>
+              11 - พฤศจิกายน
+            </ion-option>
+            <ion-option [value]=12>
+              12 - ธันวาคม
+            </ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="isValid('plantingThruMonth')">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-item>
+      <ion-label>
+        6.1) การทำนาครั้งที่ {{ text }} ปล่อยน้ำเข้านากี่ครั้ง
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number" placeholder="กรอกจำนวน" formControlName="waterFillingCount" [class.invalid]="isValid('waterFillingCount')"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="isValid('waterFillingCount')">
+      <span class="invalid-msg">
+        กรุณากรอกจำนวน
+      </span>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>
+        7.1) การทำนาครั้งที่ {{ text }} โดยเฉลี่ยปล่อยน้ำสูงกี่เซนติเมตร
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number" placeholder="กรอกจำนวน" formControlName="waterHeightCm" [class.invalid]="isValid('waterHeightCm')"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="isValid('waterHeightCm')">
+      <span class="invalid-msg">
+        กรุณากรอกจำนวน
+      </span>
+    </ion-item>
+
+  </ion-card-content>
+</ion-card>

@@ -1,0 +1,54 @@
+<ion-header>
+
+  <questionnaire-menu title="ข้อมูลพื้นฐานส่วนบุคคล"></questionnaire-menu>
+
+</ion-header>
+
+
+<ion-content padding>
+  <h3>ข้อมูลพื้นฐานส่วนบุคคล</h3>
+
+  <ion-card>
+    <ion-card-header>
+      <!-- 4.1 ชื่อสถานประกอบการ/หน่วยงาน -->
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>ชื่อผู้ให้ข้อมูล</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-input class="backgroundinput" type="text" placeholder="กรอกชื่อ"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>ประเภทสถานประกอบการผลิต </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>เลือก</ion-label>
+          <ion-select>
+            <ion-option>1.บ้านเดี่ยว</ion-option>
+            <ion-option>2.บ้านแฝด/ทาวน์เฮ้า/ทาวน์โฮม</ion-option>
+            <ion-option>3.ห้องแถว/เรือนแถว/ตึกแถว</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>1.4 ครัวเรือนนี้มีการใช้น้้าเพื่อรดน้้าต้นไม้/ สวนหย่อม/สวนครัว ในบริเวณที่อยู่อาศัยหรือไม่
+          </ion-label>
+        </ion-item>
+        <ion-row radio-group>
+          <ion-item col-6>
+            <ion-label>ใช้</ion-label>
+            <ion-radio item-left></ion-radio>
+          </ion-item>
+          <ion-item col-6>
+            <ion-label>ไม่ใช้</ion-label>
+            <ion-radio item-left></ion-radio>
+          </ion-item>
+        </ion-row>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <form-buttons-bar></form-buttons-bar>
+
+</ion-content>

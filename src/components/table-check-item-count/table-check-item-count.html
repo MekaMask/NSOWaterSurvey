@@ -1,0 +1,8 @@
+<button ion-item (click)="showModal()" [formGroup]="FormItem">
+  <ion-checkbox item-start formControlName="hasItem" (ionChange)="showModal()"></ion-checkbox>
+  <ion-label col-6>
+    {{ text }}
+  </ion-label>
+  <ion-input *ngIf="FormItem.get('itemCount').value; else nodata" disabled="true" clear item-end type="number" formControlName="itemCount"></ion-input>
+  <ng-template #nodata clear item-end>กดเพื่อใส่ข้อมูล</ng-template>
+</button>

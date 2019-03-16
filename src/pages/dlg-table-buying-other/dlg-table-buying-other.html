@@ -1,0 +1,96 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>5. อื่นๆ</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form [formGroup]="FormItem" (ngSubmit)="okDialog()">
+
+    <ion-item>
+      <ion-label col-6>ชนิด</ion-label>
+      <ion-input type="text" formControlName="name" [class.invalid]="isValid('name')"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="isValid('name')">
+      <span class="invalid-msg">
+        กรุณากรอกข้อมูล
+      </span>
+    </ion-item>
+
+    <ion-item>
+      <ion-label col-6>ขนาดบรรจุภัณฑ์ ( {{ size }} )</ion-label>
+      <ion-input type="number" formControlName="size" [class.invalid]="isValid('size')"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="isValid('size')">
+      <span class="invalid-msg">
+        กรุณากรอกข้อมูล
+      </span>
+    </ion-item>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>จำนวนที่ซื้อต่อเดือน</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label col-6>เพื่ออุปโภค บริโภค</ion-label>
+        <ion-input type="number" formControlName="drink" [class.invalid]="isValid('drink')"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="isValid('drink')">
+        <span class="invalid-msg">
+          กรุณากรอกข้อมูล
+        </span>
+      </ion-item>
+
+      <ion-item>
+        <ion-label col-6>เพื่อทำการเกษตร</ion-label>
+        <ion-input type="number" formControlName="agriculture" [class.invalid]="isValid('agriculture')"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="isValid('agriculture')">
+        <span class="invalid-msg">
+          กรุณากรอกข้อมูล
+        </span>
+      </ion-item>
+
+      <ion-item>
+        <ion-label col-6>เพื่อผลิตสินค้า</ion-label>
+        <ion-input type="number" formControlName="factory" [class.invalid]="isValid('factory')"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="isValid('factory')">
+        <span class="invalid-msg">
+          กรุณากรอกข้อมูล
+        </span>
+      </ion-item>
+
+      <ion-item>
+        <ion-label col-6>เพื่อการบริการ</ion-label>
+        <ion-input type="number" formControlName="service" [class.invalid]="isValid('service')"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="isValid('service')">
+        <span class="invalid-msg">
+          กรุณากรอกข้อมูล
+        </span>
+      </ion-item>
+    </ion-list>
+
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button ion-button type="button" block color="light" (click)="closeDialog()">Cancel</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button block [disabled]="FormItem.invalid">OK</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </form>
+
+
+
+
+</ion-content>

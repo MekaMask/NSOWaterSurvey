@@ -1,0 +1,289 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>ข้อมูลครัวเรือน</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form [formGroup]="FormItem" (ngSubmit)="okDialog()">
+    <!-- <ion-input type="text" formControlName="ea" ></ion-input>
+    <ion-input type="text" formControlName="buildingId" ></ion-input> -->
+
+    <div formGroupName="subUnit">
+
+      <ion-item>
+        <ion-label>3.1 ลำดับครัวเรือนสถานประกอบการในบ้าน/อาคาร/สิ่งปลูกสร้าง (ยูนิตย่อย)</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>หมายเลขห้อง</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" formControlName="roomNumber" [class.invalid]="isValid('subUnit.roomNumber')"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="isValid('subUnit.roomNumber')">
+        <span class="invalid-msg">
+          กรุณากรอกหมายเลขห้อง
+        </span>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>
+          ผลการเข้าพบ 1/3
+        </ion-label>
+        <ion-select interface="action-sheet" formControlName="access" [class.invalid]="isValid('subUnit.access')">
+          <ion-option [value]="1">
+            1. มีผู้ให้ข้อมูล และให้ความร่วมมือ
+          </ion-option>
+          <ion-option [value]="2">
+            2. มีผู้ให้ข้อมูล แต่ไม่ให้ความร่วมมือ
+          </ion-option>
+          <ion-option [value]="3">
+            3. ไม่มี/ไม่พบผู้ให้ข้อมูล
+          </ion-option>
+          <ion-option [value]="4">
+            4. ห้อง/บ้าน/อาคาร ว่าง
+          </ion-option>
+          <ion-option [value]="5">
+            5. ห้อง/บ้าน/อาคาร ร้าง
+          </ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="isValid('subUnit.access')">
+        <span class="invalid-msg">
+          กรุณาเลือกการเข้าพบ
+        </span>
+      </ion-item>
+
+      <div *ngIf="FormItem.get('subUnit.access').value == 1">
+        <ion-item>
+          <ion-label>3.2 การแยกมิเตอร์น้ำประปา/น้ำบาดาล</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            1. ใช้น้ำประปาหรือไม่
+          </ion-label>
+        </ion-item>
+        <ion-row radio-group formControlName="hasPlumbing">
+          <!-- <ion-item *ngIf="isValid('subUnit.hasPlumbing')">
+            <span class="invalid-msg">
+              กรุณาเลือก
+            </span>
+          </ion-item> -->
+          <ion-item col-6>
+            <ion-radio [value]="true" item-left></ion-radio>
+            <ion-label>ใช้</ion-label>
+          </ion-item>
+          <ion-item col-6>
+            <ion-radio [value]="false" item-left></ion-radio>
+            <ion-label>ไม่ใช้</ion-label>
+          </ion-item>
+        </ion-row>
+
+        <div *ngIf="FormItem.get('subUnit.hasPlumbing').value">
+          <ion-item>
+            <ion-label>
+              2. มีมิเตอร์น้ำประปาแยกออกจากส่วนกลางหรือไม่
+            </ion-label>
+          </ion-item>
+          <ion-row radio-group formControlName="hasPlumbingMeter">
+            <!-- <ion-item *ngIf="isValid('subUnit.hasPlumbingMeter')">
+              <span class="invalid-msg">
+                กรุณาเลือก
+              </span>
+            </ion-item> -->
+            <ion-item col-6>
+              <ion-radio [value]="true" item-left></ion-radio>
+              <ion-label>มี</ion-label>
+            </ion-item>
+            <ion-item col-6>
+              <ion-radio [value]="false" item-left></ion-radio>
+              <ion-label>ไม่มี</ion-label>
+            </ion-item>
+          </ion-row>
+        </div>
+
+        <div *ngIf="FormItem.get('subUnit.hasPlumbingMeter').value">
+          <ion-item>
+            <ion-label>
+              2.1 เป็นมิเตอร์ของการประปาส่วนภูมิภาค/นครหลวงใช่หรือไม่
+            </ion-label>
+          </ion-item>
+          <ion-row radio-group formControlName="isPlumbingMeterXWA">
+            <!-- <ion-item *ngIf="isValid('subUnit.isPlumbingMeterXWA')">
+              <span class="invalid-msg">
+                กรุณาเลือก
+              </span>
+            </ion-item> -->
+            <ion-item col-6>
+              <ion-radio [value]="true" item-left></ion-radio>
+              <ion-label>ใช่</ion-label>
+            </ion-item>
+            <ion-item col-6>
+              <ion-radio [value]="false" item-left></ion-radio>
+              <ion-label>ไม่ใช่</ion-label>
+            </ion-item>
+          </ion-row>
+        </div>
+
+        <ion-item>
+          <ion-label>
+            3. ใช้น้ำบาดาลหรือไม่
+          </ion-label>
+        </ion-item>
+        <ion-row radio-group formControlName="hasGroundWater">
+          <!-- <ion-item *ngIf="isValid('subUnit.hasGroundWater')">
+            <span class="invalid-msg">
+              กรุณาเลือก
+            </span>
+          </ion-item> -->
+          <ion-item col-6>
+            <ion-radio [value]="true" item-left></ion-radio>
+            <ion-label>ใช้</ion-label>
+          </ion-item>
+          <ion-item col-6>
+            <ion-radio [value]="false" item-left></ion-radio>
+            <ion-label>ไม่ใช้</ion-label>
+          </ion-item>
+        </ion-row>
+
+        <div *ngIf="FormItem.get('subUnit.hasGroundWater').value">
+          <ion-item>
+            <ion-label>
+              4. มีมิเตอร์น้ำบาดาลแยกออกจากส่วนกลางหรือไม่
+            </ion-label>
+          </ion-item>
+          <ion-row radio-group formControlName="hasGroundWaterMeter">
+            <!-- <ion-item *ngIf="isValid('subUnit.hasGroundWaterMeter')">
+              <span class="invalid-msg">
+                กรุณาเลือก
+              </span>
+            </ion-item> -->
+            <ion-item col-6>
+              <ion-radio [value]="true" item-left></ion-radio>
+              <ion-label>มี</ion-label>
+            </ion-item>
+            <ion-item col-6>
+              <ion-radio [value]="false" item-left></ion-radio>
+              <ion-label>ไม่มี</ion-label>
+            </ion-item>
+          </ion-row>
+        </div>
+      </div>
+
+    </div>
+
+    <div *ngIf="FormItem.get('subUnit.access').value == 1">
+      <ion-item>
+        <ion-label>3.3 กิจกรรมการใช้น้ำ</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          1. เพื่อการอุปโภคบริโภค: สถานนี้มีผู้อยู่อาศัยติดต่อกันนานเกิน 3 เดือนใช่หรือไม่
+        </ion-label>
+      </ion-item>
+      <ion-row radio-group formControlName="isHouseHold">
+        <!-- <ion-item *ngIf="isValid('isHouseHold')">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item> -->
+        <ion-item col-6>
+          <ion-radio [value]="true" item-left></ion-radio>
+          <ion-label>ใช่</ion-label>
+        </ion-item>
+        <ion-item col-6>
+          <ion-radio [value]="false" item-left></ion-radio>
+          <ion-label>ไม่ใช่</ion-label>
+        </ion-item>
+      </ion-row>
+      <ion-item>
+        <ion-label>
+          2. เพื่อการเกษตร: ผู้อยู่อาศัยอยู่ในสถานที่นี้มีพื้นที่ปลูกพืช เลี้ยงสัตว์ หรือทำการเกษตร<br>เอง ใช่หรือไม่
+        </ion-label>
+      </ion-item>
+      <ion-row radio-group formControlName="isAgriculture">
+        <!-- <ion-item *ngIf="isValid('isAgriculture')">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item> -->
+        <ion-item col-6>
+          <ion-radio [value]="true" item-left></ion-radio>
+          <ion-label>ใช่</ion-label>
+        </ion-item>
+        <ion-item col-6>
+          <ion-radio [value]="false" item-left></ion-radio>
+          <ion-label>ไม่ใช่</ion-label>
+        </ion-item>
+      </ion-row>
+      <ion-item>
+        <ion-label>
+          3. เพื่อการผลิต: สถานที่นี้ใช้เพื่อทำการผลิต ใช่หรือไม่
+        </ion-label>
+      </ion-item>
+      <ion-row radio-group formControlName="isFactorial">
+        <!-- <ion-item *ngIf="isValid('isFactorial')">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item> -->
+        <ion-item col-6>
+          <ion-radio [value]="true" item-left></ion-radio>
+          <ion-label>ใช่</ion-label>
+        </ion-item>
+        <ion-item col-6>
+          <ion-radio [value]="false" item-left></ion-radio>
+          <ion-label>ไม่ใช่</ion-label>
+        </ion-item>
+      </ion-row>
+      <ion-item>
+        <ion-label>
+          4. เพื่อการบริการ: สถานที่นี้ใช้เพื่อทำการบริการ ใช่หรือไม่
+        </ion-label>
+      </ion-item>
+      <ion-row radio-group formControlName="isCommercial">
+        <!-- <ion-item *ngIf="isValid('isCommercial')">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item> -->
+        <ion-item col-6>
+          <ion-radio [value]="true" item-left></ion-radio>
+          <ion-label>ใช่</ion-label>
+        </ion-item>
+        <ion-item col-6>
+          <ion-radio [value]="false" item-left></ion-radio>
+          <ion-label>ไม่ใช่</ion-label>
+        </ion-item>
+      </ion-row>
+    </div>
+
+    <div *ngIf="FormItem.get('subUnit.access').value == 1 || FormItem.get('subUnit.access').value == 2 || FormItem.get('subUnit.access').value == 3">
+      <ion-item>
+        <ion-label>ปัญหา/อุปสรรค</ion-label>
+      </ion-item>
+      <div formGroupName="comments">
+        <ion-item>
+          <ion-input type="text" formControlName="text"></ion-input>
+        </ion-item> 
+      </div>
+    </div>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button ion-button type="button" block color="light" (click)="closeDialog()">Cancel</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button block>OK</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+</ion-content>

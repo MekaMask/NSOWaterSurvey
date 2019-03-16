@@ -1,0 +1,39 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ text }}ขนาดพื้นที่</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+    <form [formGroup]="FormItem">
+
+        <ion-list>
+            <ion-item>
+              <ion-label>ไร่</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-input type="number" formControlName="rai"></ion-input>
+            </ion-item>
+            
+            <ion-item>
+              <ion-label>ตารางวา</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-input type="number" formControlName="sqWa"></ion-input>
+            </ion-item>
+          </ion-list>
+      
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <button ion-button block color="light" (click)="closeDialog()">Cancel</button>
+              </ion-col>
+              <ion-col>
+                <button ion-button block (click)="okDialog()">OK</button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+    </form>
+</ion-content>

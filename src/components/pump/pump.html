@@ -1,0 +1,774 @@
+<ion-card [formGroup]="FormItem">
+  <ion-card-content>
+
+    <!-- 1) เป็นเครื่องสูบอัตโนมัติ ใช่หรือไม่ -->
+    <ion-item>
+      <ion-label>
+        <b>เครื่องที่ {{ text }}</b>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        1) เป็นเครื่องสูบน้ำอัตโนมัติ ใช่หรือไม่
+      </ion-label>
+    </ion-item>
+
+    <ion-row radio-group formControlName="pumpAuto" [class.invalid]="isValid('pumpAuto')">
+      <ion-item col-6>
+        <ion-label>
+          ใช่
+        </ion-label>
+        <ion-radio [value]="true" item-left></ion-radio>
+      </ion-item>
+      <ion-item col-6>
+        <ion-label>
+          ไม่ใช่
+        </ion-label>
+        <ion-radio [value]="false" item-left></ion-radio>
+      </ion-item>
+      <ion-item *ngIf="isValid('pumpAuto')">
+        <span class="invalid-msg">
+          กรุณาเลือก
+        </span>
+      </ion-item>
+    </ion-row>
+    <!-- 2) ใช้ระยะเวลาในการสูบน้ำต่อครั้งนานเท่าไร (ให้ประมาณน้ำทุกกิจกรรมรวมกัน) -->
+    <div *ngIf="FormItem.get('pumpAuto').value == false">
+      <ion-item>
+        <ion-label>
+          2) ใช้ระยะเวลาในการสูบน้ำต่อครั้งเท่าไร
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-input type="number" placeholder="จำนวนการใช้น้ำ (ชม.)" formControlName="hoursPerPump" [class.invalid]="isValid('hoursPerPump')"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="isValid('hoursPerPump')">
+        <span class="invalid-msg">
+          กรุณากรอก
+        </span>
+      </ion-item>
+
+      <!-- 3) ในระยะเวลา 1 ปีสูบน้ำกี่ครั้ง -->
+      <ion-item>
+        <ion-label>
+          3) ในระยะเวลา 1 ปีสูบน้ำกี่ครั้ง
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-input type="number" placeholder="จำนวนครั้ง" formControlName="numberOfPumpsPerYear" [class.invalid]="isValid('numberOfPumpsPerYear')"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="isValid('numberOfPumpsPerYear')">
+        <span class="invalid-msg">
+          กรุณากรอก
+        </span>
+      </ion-item>
+
+      <!-- 4) มีอัตราการสูบเท่าไร -->
+      <ion-item>
+        <ion-label>
+          4) มีอัตราการสูบเท่าไร(ลบ.ม/ชม.)
+        </ion-label>
+      </ion-item>
+
+      <ion-row radio-group formControlName="hasPumpRate" [class.invalid]="isValid('hasPumpRate')">
+        <ion-item *ngIf="isValid('hasPumpRate')">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label>
+              ทราบ
+            </ion-label>
+            <ion-radio [value]="true" item-left></ion-radio>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label>
+              ไม่ทราบ
+            </ion-label>
+            <ion-radio [value]="false" item-left></ion-radio>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <div [ngSwitch]="FormItem.get('hasPumpRate').value">
+        <div *ngSwitchCase="true">
+          <ion-item>
+            <ion-input tyep="number" placeholder="อัตราการสูบน้ำ (ลบ.ม./ชม.)" formControlName="pumpRate"
+              [class.invalid]="isValid('pumpRate')"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="isValid('pumpRate')">
+            <span class="invalid-msg">
+              กรุณากรอก
+            </span>
+          </ion-item>
+        </div>
+      </div>
+
+      <div *ngIf="FormItem.get('hasPumpRate').value == false">
+        <ion-item>
+          <ion-label>
+            5) เครื่องสูบน้ำใช้แหล่งพลังงานจากที่ใด
+          </ion-label>
+        </ion-item>
+
+        <ion-row radio-group formControlName="energySource" [class.invalid]="isValid('energySource')">
+          <ion-item *ngIf="isValid('energySource')">
+            <span class="invalid-msg">
+              กรุณาเลือก
+            </span>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              ใช้ไฟฟ้า
+            </ion-label>
+            <ion-radio [value]="1" item-left></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              ใช้น้ำมันดีเซล(โซล่า)
+            </ion-label>
+            <ion-radio [value]="2" item-left></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              ใช้น้ำมันเบนซิน
+            </ion-label>
+            <ion-radio [value]="3" item-left></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              รถไถเดินตาม
+            </ion-label>
+            <ion-radio [value]="4" item-left></ion-radio>
+          </ion-item>
+
+        </ion-row>
+
+        <ion-item>
+          <ion-label>
+            6) เครื่องสูบชนิดใด
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            ชนิดเครื่องสูบ
+          </ion-label>
+          <ion-select interface="action-sheet" formControlName="pumpType" [class.invalid]="isValid('pumpType')">
+            <ion-option [value]="1">
+              ปั๊มซับเมิร์ส/ปั๊มแบบจุ่ม
+            </ion-option>
+            <ion-option [value]="2">
+              ปั๊มเจ็ท/ ปั๊มน้ำอัตโนมัติสำหรับดูดน้ำลึก
+            </ion-option>
+            <ion-option [value]="3">
+              ปั๊มหอยโข่ง
+            </ion-option>
+            <ion-option [value]="4">
+              ปั๊มชัก
+            </ion-option>
+            <ion-option [value]="5">
+              ปั๊มเจ็ท
+            </ion-option>
+            <ion-option [value]="6">
+              เทอร์ไบร์
+            </ion-option>
+            <ion-option [value]="7">
+              ปั๊มไดโว่/ปั๊มจุ่ม/ปั๊มแช่
+            </ion-option>
+            <ion-option [value]="8">
+              ปั๊มน้ำอัตโนมัติ ถังกลม/ ถังเหลี่ยม
+            </ion-option>
+            <ion-option [value]="9">
+              ปั๊มพญานาค
+            </ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="isValid('pumpType')">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            7) ขนาดวัตต์/แรงม้าเท่าไร
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            วัตต์/ขนาดแรงม้า
+          </ion-label>
+          <ion-select interface="action-sheet" formControlName="horsePower" [class.invalid]="isValid('horsePower')">
+            <ion-option [value]="1">
+              50-100 / 0.05 - 0.1
+            </ion-option>
+            <ion-option [value]="2">
+              100-200 / 0.1 - 0.2
+            </ion-option>
+            <ion-option [value]="3">
+              101-200 / 0.1 - 0.2
+            </ion-option>
+            <ion-option [value]="4">
+              101-200 / 0.1 - 0.3
+            </ion-option>
+            <ion-option [value]="5">
+              200-300 / 0.2 - 0.4
+            </ion-option>
+            <ion-option [value]="6">
+              201-300 / 0.2 - 0.4
+            </ion-option>
+            <ion-option [value]="7">
+              201-300 / 0.3 - 0.4
+            </ion-option>
+            <ion-option [value]="8">
+              200-400 / 0.2 - 0.5
+            </ion-option>
+            <ion-option [value]="9">
+              200-500 / 0.2 - 0.7
+            </ion-option>
+            <ion-option [value]="10">
+              301-400 / 0.4 - 0.5
+            </ion-option>
+            <ion-option [value]="11">
+              301-400 / 0.4 - 0.6
+            </ion-option>
+            <ion-option [value]="12">
+              301-500 / 0.4 - 0.7
+            </ion-option>
+            <ion-option [value]="13">
+              401-500 / 0.5 - 0.7
+            </ion-option>
+            <ion-option [value]="14">
+              401-500 / 0.6 - 0.7
+            </ion-option>
+            <ion-option [value]="15">
+              401-600 / 0.5 - 1
+            </ion-option>
+            <ion-option [value]="16">
+              501-700 / 0.7 - 0.9
+            </ion-option>
+            <ion-option [value]="17">
+              501-700 / 0.7 - 1
+            </ion-option>
+            <ion-option [value]="18">
+              501-1000 / 0.7 - 1.5
+            </ion-option>
+            <ion-option [value]="19">
+              601-1000 / 0.5 - 1
+            </ion-option>
+            <ion-option [value]="20">
+              701-800 / 0.9 - 1
+            </ion-option>
+            <ion-option [value]="21">
+              701-1000 / 1 - 1.5
+            </ion-option>
+            <ion-option [value]="22">
+              >800 / >1
+            </ion-option>
+            <ion-option [value]="23">
+              1001-1200 / 1.5 - 1.7
+            </ion-option>
+            <ion-option [value]="24">
+              1001-1400 / 1.5 - 2
+            </ion-option>
+            <ion-option [value]="25">
+              1100 / 1.5
+            </ion-option>
+            <ion-option [value]="26">
+              1201-1400 / 1.7 - 2
+            </ion-option>
+            <ion-option [value]="27">
+              1401-2000 / 2 - 2.5
+            </ion-option>
+            <ion-option [value]="28">
+              1000-2500 / 1 - 3
+            </ion-option>
+            <ion-option [value]="29">
+              1000-4000 / 1 - 5
+            </ion-option>
+            <ion-option [value]="30">
+              1500 / 2
+            </ion-option>
+            <ion-option [value]="31">
+              2000-4000 / 2 - 5
+            </ion-option>
+            <ion-option [value]="32">
+              2000-4000 / 2.2 - 5.5
+            </ion-option>
+            <ion-option [value]="33">
+              2001-2500 / 2.5 - 3.5
+            </ion-option>
+            <ion-option [value]="34">
+              2001-3000 / 2.5 - 4
+            </ion-option>
+            <ion-option [value]="35">
+              2001-2500 / 3 - 3.5
+            </ion-option>
+            <ion-option [value]="36">
+              2501-3500 / 3 - 4.5
+            </ion-option>
+            <ion-option [value]="37">
+              2501-3500 / 3 - 5
+            </ion-option>
+            <ion-option [value]="38">
+              2501-3500 / 3.5 - 4.5
+            </ion-option>
+            <ion-option [value]="39">
+              2501-3500 / 3.5 - 5
+            </ion-option>
+            <ion-option [value]="40">
+              3001-5000 / 4 -7
+            </ion-option>
+            <ion-option [value]="41">
+              3501-4500 / 4.5 -6
+            </ion-option>
+            <ion-option [value]="42">
+              3501-4000 / 5 -5.5
+            </ion-option>
+            <ion-option [value]="43">
+              3501-4500 / 5 -6
+            </ion-option>
+            <ion-option [value]="44">
+              < 4000 / < 5 </ion-option> <ion-option [value]="45">
+                4001-4500 / 5.5 - 6
+            </ion-option>
+            <ion-option [value]="46">
+              4001-5000 / 5 - 7
+            </ion-option>
+            <ion-option [value]="47">
+              4501-5000 / 6 - 6.5
+            </ion-option>
+            <ion-option [value]="48">
+              4501-5000 / 6 - 7
+            </ion-option>
+            <ion-option [value]="49">
+              4501-5500 / 6 - 7.5
+            </ion-option>
+            <ion-option [value]="50">
+              < 5000 / < 7 </ion-option> <ion-option [value]="51">
+                4501-6000 / 6 - 8
+            </ion-option>
+            <ion-option [value]="52">
+              5000-12000 / 6.5 - 16
+            </ion-option>
+            <ion-option [value]="53">
+              5001-6000 / 6.5 - 8
+            </ion-option>
+            <ion-option [value]="54">
+              5001-6000 / 7 - 8
+            </ion-option>
+            <ion-option [value]="55">
+              5001-7000 / 7 - 9
+            </ion-option>
+            <ion-option [value]="56">
+              5001-7000 / 7 - 9.5
+            </ion-option>
+            <ion-option [value]="57">
+              < 5500 / < 7 </ion-option> <ion-option [value]="58">
+                5500-6000 / 7 - 8
+            </ion-option>
+            <ion-option [value]="59">
+              5501-7500 / 7.5 - 10
+            </ion-option>
+            <ion-option [value]="60">
+              6001-6500 / 8 - 9
+            </ion-option>
+            <ion-option [value]="61">
+              6001-7000 / 8 - 9
+            </ion-option>
+            <ion-option [value]="62">
+              6001-7000 / 8 - 9.5
+            </ion-option>
+            <ion-option [value]="63">
+              6001-7500 / 8 - 10
+            </ion-option>
+            <ion-option [value]="64">
+              6001-8000 / 8 - 11
+            </ion-option>
+            <ion-option [value]="65">
+              6501-7000 / 9 - 9.5
+            </ion-option>
+            <ion-option [value]="66">
+              >7000 / >9
+            </ion-option>
+            <ion-option [value]="67">
+              >7000 / >9.5
+            </ion-option>
+            <ion-option [value]="68">
+              >7500 / >10
+            </ion-option>
+            <ion-option [value]="69">
+              7001-7500 / 9.5 - 10
+            </ion-option>
+            <ion-option [value]="70">
+              7001-8000 / 8 - 9.5
+            </ion-option>
+            <ion-option [value]="71">
+              7001-8000 / 9.5 - 10.5
+            </ion-option>
+            <ion-option [value]="72">
+              7001-8000 / 9 - 11
+            </ion-option>
+            <ion-option [value]="73">
+              7001-8000 / 9.5 - 11
+            </ion-option>
+            <ion-option [value]="74">
+              7001-10000 / 9 - 15
+            </ion-option>
+            <ion-option [value]="75">
+              7501-8000 / 10 - 10.5
+            </ion-option>
+            <ion-option [value]="76">
+              7501-10000 / 10 - 15
+            </ion-option>
+            <ion-option [value]="77">
+              8001-8500 / 10.5 - 11
+            </ion-option>
+            <ion-option [value]="78">
+              8001-8500 / 11 - 11.5
+            </ion-option>
+            <ion-option [value]="79">
+              8001-9000 / 11 - 12
+            </ion-option>
+            <ion-option [value]="80">
+              8001-10000 / 10.5 - 13
+            </ion-option>
+            <ion-option [value]="81">
+              8001-10000 / 11 - 15
+            </ion-option>
+            <ion-option [value]="82">
+              8501-9000 / 11 - 12
+            </ion-option>
+            <ion-option [value]="83">
+              8501-9000 / 11.5 - 12
+            </ion-option>
+            <ion-option [value]="84">
+              9001-9500 / 12 - 13
+            </ion-option>
+            <ion-option [value]="85">
+              9001-10000 / 12 - 14
+            </ion-option>
+            <ion-option [value]="86">
+              9001-11000 / 12 - 15
+            </ion-option>
+            <ion-option [value]="87">
+              9501-10500 / 13 - 14
+            </ion-option>
+            <ion-option [value]="88">
+              9501-11000 / 13 - 15
+            </ion-option>
+            <ion-option [value]="89">
+              >10000 / >13
+            </ion-option>
+            <ion-option [value]="90">
+              10501-12000 / 14 - 15
+            </ion-option>
+            <ion-option [value]="91">
+              10001-12000 / 14 - 16
+            </ion-option>
+            <ion-option [value]="92">
+              11001-12000 / 15 - 16
+            </ion-option>
+            <ion-option [value]="93">
+              11001-13500 / 15 - 18
+            </ion-option>
+            <ion-option [value]="94">
+              10001-14000 / 15 - 20
+            </ion-option>
+            <ion-option [value]="95">
+              10001-14000 / 15 - 25
+            </ion-option>
+            <ion-option [value]="96">
+              10001-15000 / 15 - 20
+            </ion-option>
+            <ion-option [value]="97">
+              >11500 / >15
+            </ion-option>
+            <ion-option [value]="98">
+              >12000 / >16
+            </ion-option>
+            <ion-option [value]="99">
+              12001-15000 / 16 - 20
+            </ion-option>
+            <ion-option [value]="100">
+              14001-17000 / 20 - 23
+            </ion-option>
+            <ion-option [value]="101">
+              14000-18000 / 19 - 24
+            </ion-option>
+            <ion-option [value]="102">
+              15001-20000 / 20 - 25
+            </ion-option>
+            <ion-option [value]="103">
+              17001-20000 / 23 - 25
+            </ion-option>
+            <ion-option [value]="104">
+              > 18000 / > 24
+            </ion-option>
+            <ion-option [value]="105">
+              20001-25000 / 25 - 35
+            </ion-option>
+            <ion-option [value]="106">
+              20001-30000 / 25 - 40
+            </ion-option>
+            <ion-option [value]="107">
+              25001-30000 / 35 - 40
+            </ion-option>
+            <ion-option [value]="108">
+              30001-40000 / 40 - 55
+            </ion-option>
+            <ion-option [value]="109">
+              35001-40000 / 47 - 55
+            </ion-option>
+            <ion-option [value]="110">
+              >40000 / >55
+            </ion-option>
+            <ion-option [value]="111">
+              40001-50000 / 55 - 70
+            </ion-option>
+            <ion-option [value]="112">
+              50000-100000 / 65 - 135
+            </ion-option>
+            <ion-option [value]="113">
+              50001-60000 / 70 - 80
+            </ion-option>
+            <ion-option [value]="114">
+              60001-80000 / 80 - 105
+            </ion-option>
+            <ion-option [value]="115">
+              80001-110000 / 105 - 150
+            </ion-option>
+            <ion-option [value]="116">
+              >100000 / >135
+            </ion-option>
+            <ion-option [value]="117">
+              >110000 / >150
+            </ion-option>
+
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="isValid('horsePower')">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            8) ขนาดท่อดูดเท่าไร (นิ้ว)
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            ขนาดท่อดูด
+          </ion-label>
+          <ion-select interface="action-sheet" formControlName="suctionPipeSize" [class.invalid]="isValid('suctionPipeSize')">
+            <ion-option [value]="1">
+              (1/2)-1
+            </ion-option>
+            <ion-option [value]="2">
+              (1/2)-2
+            </ion-option>
+            <ion-option [value]="3">
+              (1/2)-3
+            </ion-option>
+            <ion-option [value]="4">
+              (1/2)-4
+            </ion-option>
+            <ion-option [value]="5">
+              (1/2)-6
+            </ion-option>
+            <ion-option [value]="6">
+              (1/2)-8
+            </ion-option>
+            <ion-option [value]="7">
+              (1/2)-10
+            </ion-option>
+            <ion-option [value]="8">
+              (1/2)-1 (1/2)
+            </ion-option>
+            <ion-option [value]="9">
+              1(1/2)-2
+            </ion-option>
+            <ion-option [value]="10">
+              1(1/4)-2
+            </ion-option>
+            <ion-option [value]="11">
+              1
+            </ion-option>
+            <ion-option [value]="12">
+              2
+            </ion-option>
+            <ion-option [value]="13">
+              2-3
+            </ion-option>
+            <ion-option [value]="14">
+              2-4
+            </ion-option>
+            <ion-option [value]="15">
+              3
+            </ion-option>
+            <ion-option [value]="16">
+              4
+            </ion-option>
+            <ion-option [value]="17">
+              4 - 6
+            </ion-option>
+            <ion-option [value]="18">
+              4 - 8
+            </ion-option>
+            <ion-option [value]="19">
+              5
+            </ion-option>
+            <ion-option [value]="20">
+              5 - 6
+            </ion-option>
+            <ion-option [value]="21">
+              6
+            </ion-option>
+            <ion-option [value]="22">
+              6 - 12
+            </ion-option>
+            <ion-option [value]="23">
+              7 - 8
+            </ion-option>
+            <ion-option [value]="24">
+              9 - 10
+            </ion-option>
+            <ion-option [value]="25">
+              11 - 12
+            </ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="isValid('suctionPipeSize')">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            9) ขนาดท่อส่งเท่าไร (นิ้ว)
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            ขนาดท่อส่ง
+          </ion-label>
+          <ion-select interface="action-sheet" formControlName="pipelineSize" [class.invalid]="isValid('pipelineSize')">
+            <ion-option [value]="1">
+              1/2-1
+            </ion-option>
+            <ion-option [value]="2">
+              (1/2)-6
+            </ion-option>
+            <ion-option [value]="3">
+              (1/2)-8
+            </ion-option>
+            <ion-option [value]="4">
+              1 (1/2)
+            </ion-option>
+            <ion-option [value]="5">
+              2 (1/2)
+            </ion-option>
+            <ion-option [value]="6">
+              3 (1/2)
+            </ion-option>
+            <ion-option [value]="7">
+              1 (1/2)-2
+            </ion-option>
+            <ion-option [value]="8">
+              1/2-1 (1/2)
+            </ion-option>
+            <ion-option [value]="9">
+              1 (1/2)-3
+            </ion-option>
+            <ion-option [value]="10">
+              1-3
+            </ion-option>
+            <ion-option [value]="11">
+              1-4
+            </ion-option>
+            <ion-option [value]="12">
+              1-5
+            </ion-option>
+            <ion-option [value]="13">
+              1/2-2
+            </ion-option>
+            <ion-option [value]="14">
+              1/2-3
+            </ion-option>
+            <ion-option [value]="15">
+              2
+            </ion-option>
+            <ion-option [value]="16">
+              2-3
+            </ion-option>
+            <ion-option [value]="17">
+              2-4
+            </ion-option>
+            <ion-option [value]="18">
+              2-6
+            </ion-option>
+            <ion-option [value]="19">
+              4
+            </ion-option>
+            <ion-option [value]="20">
+              4-6
+            </ion-option>
+            <ion-option [value]="21">
+              4 (1/2)
+            </ion-option>
+            <ion-option [value]="22">
+              1/2-4
+            </ion-option>
+            <ion-option [value]="23">
+              5
+            </ion-option>
+            <ion-option [value]="24">
+              5-6
+            </ion-option>
+            <ion-option [value]="25">
+              6
+            </ion-option>
+            <ion-option [value]="26">
+              6-12
+            </ion-option>
+            <ion-option [value]="27">
+              7-8
+            </ion-option>
+            <ion-option [value]="28">
+              9-10
+            </ion-option>
+            <ion-option [value]="29">
+              11-12
+            </ion-option>
+            <ion-option [value]="30">
+              4-8
+            </ion-option>
+            <ion-option [value]="31">
+              3
+            </ion-option>
+            <ion-option [value]="32">
+              1
+            </ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="isValid('pipelineSize')">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item>
+      </div>
+
+
+    </div>
+
+
+  </ion-card-content>
+</ion-card>

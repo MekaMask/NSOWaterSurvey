@@ -1,0 +1,35 @@
+<div [formGroup]="FormItem">
+
+  <ion-item *ngIf="isValid('province')">
+    <span class="invalid-msg">กรุณาเลือกจังหวัด</span>
+  </ion-item>
+  <ion-item [class.invalid]="isValid('province')">
+    <ion-label>จังหวัด</ion-label>
+    <ion-select interface="action-sheet" formControlName="province" >
+      <ion-option>กรุงเทพมหานคร</ion-option>
+      <ion-option>ขอนแก่น</ion-option>
+      <ion-option>ยโสธร</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="isValid('district')">
+    <span class="invalid-msg">กรุณาเลือกอำเภอ</span>
+  </ion-item>
+  <ion-item [class.invalid]="isValid('district')">
+    <ion-label>อำเภอ</ion-label>
+    <ion-select interface="action-sheet" formControlName="district" >
+      <ion-option>เมือง</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="isValid('subDistrict')">
+      <span class="invalid-msg">กรุณาเลือกตำบล</span>
+    </ion-item>
+  <ion-item [class.invalid]="isValid('subDistrict')">
+    <ion-label>ตำบล</ion-label>
+    <ion-select interface="action-sheet" formControlName="subDistrict" >
+      <ion-option>ในเมือง</ion-option>
+      <ion-option>บ้านเป็ด</ion-option>
+    </ion-select>
+  </ion-item>
+</div>

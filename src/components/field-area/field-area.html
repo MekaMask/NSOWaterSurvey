@@ -1,0 +1,10 @@
+<div [class.invalid]="isValid('rai') && isValid('ngan') && isValid('sqWa')">
+  <ion-item *ngIf="isValid('rai') && isValid('ngan') && isValid('sqWa')">
+    <span class="invalid-msg">กรุณากรอก</span>
+  </ion-item>
+  <ion-item (click)="showModal()" [formGroup]="FormItem">
+    <ion-label col-5>{{ text }}ขนาดพื้นที่</ion-label>
+    <ion-input type="text" disabled="true" value="{{FormItem.get('rai').value || ' - '}} ไร่ {{FormItem.get('ngan').value || ' - '}} งาน {{FormItem.get('sqWa').value || ' - '}} ตารางวา"></ion-input>
+    <ion-icon name="create" item-end></ion-icon>
+  </ion-item>
+</div>

@@ -1,0 +1,46 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>สระที่ {{ text }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form [formGroup]="FormItem" (ngSubmit)="okDialog()">
+
+    <ion-item>
+      <ion-label>ความกว้าง กี่เมตร</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number" formControlName="width" [class.invalid]="isValid('width')"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="isValid('width')">
+      <span class="invalid-msg">กรุณากรอกความกว้าง</span>
+    </ion-item>
+    <ion-item>
+      <ion-label>ความยาว กี่เมตร</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number" formControlName="length" [class.invalid]="isValid('length')"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="isValid('length')">
+      <span class="invalid-msg">กรุณากรอกความยาว</span>
+    </ion-item>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button ion-button type="button" block color="light" (click)="closeDialog()">Cancel</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button block [disabled]="FormItem.invalid">OK</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </form>
+
+</ion-content>

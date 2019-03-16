@@ -1,0 +1,340 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Homes
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-row>
+    <ion-item>
+      <ion-label>
+        ตะวันออกเฉียงเหนือ ขอนแก่น เมืองของแก่น ในเมือง 1 018
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        สถานะของ EA:
+      </ion-label>
+      <ion-select interface="action-sheet">
+        <ion-option value="a1">
+          กำลังสำรวจ
+        </ion-option>
+        <ion-option value="a2">
+          สำรวจครบแล้ว
+        </ion-option>
+        <ion-option value="a3">
+          ตรวจสอบแล้ว
+        </ion-option>
+        <ion-option value="a4">
+          อนุมัติแล้ว
+        </ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-col col-6>
+      <button ion-button block icon-start type="button">
+        <ion-icon name="md-refresh"></ion-icon>
+        อัพเดทข้อมูล
+      </button>
+    </ion-col>
+    <ion-col col-6>
+      <button ion-button block icon-start type="button">
+        <ion-icon name="ios-compass-outline"></ion-icon>
+        ดูแผนที่
+      </button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row align-items-center>
+    <ion-col>
+      <button ion-button block type="button">
+        สำรวจหน่วยต่อไป
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button block type="button">
+        สำรวจครบทุกหน่วยใน EA
+      </button>
+    </ion-col>
+  </ion-row>
+
+  <div>
+    <ion-segment [(ngModel)]="office">
+      <ion-segment-button value="building">
+        สน.1 ข้อมูลอาคาร
+      </ion-segment-button>
+      <ion-segment-button value="areayoi">
+        สน.2 พื้นที่ย่อย
+      </ion-segment-button>
+      <ion-segment-button value="fsedit">
+        FS ให้แก้ไข
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="office">
+    <div *ngSwitchCase="'building'">
+
+      <ion-row align-items-center>
+        <ion-col col-11>
+          <ion-searchbar></ion-searchbar>
+        </ion-col>
+        <ion-col col-1>
+          <button ion-button type="button" color="light">
+            <ion-icon name="md-search"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+
+      <ion-segment icon-start [(ngModel)]="icons">
+        <ion-segment-button value="lastest">
+          <ion-icon name="md-create"></ion-icon>
+          ข้อมูลล่าสุด
+        </ion-segment-button>
+        <ion-segment-button value="all">
+          <ion-icon name="folder"></ion-icon>
+          ข้อมูลทั้งหมด
+        </ion-segment-button>
+
+        <ion-segment-button value="pause">
+          <ion-icon name="md-pause"></ion-icon>
+          หยุดชั่วคราว
+        </ion-segment-button>
+
+        <ion-segment-button value="return">
+          <ion-icon name="md-eye"></ion-icon>
+          สำรวจครั้งที่ 2,3
+        </ion-segment-button>
+      </ion-segment>
+
+      <ion-row text-center align-items-center>
+        <ion-col col-2>
+          ลำดับที่
+        </ion-col>
+        <ion-col col-2>
+          บ้านเลขที่
+        </ion-col>
+        <ion-col col-3>
+          ชื่อสถานที่
+        </ion-col>
+        <ion-col col-4>
+          <ion-row align-items-center>
+            <ion-label>
+              ครัวเรือน/สถานประกอบการ
+            </ion-label>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              สำรวจแล้ว
+            </ion-col>
+            <ion-col col-6>
+              ทั้งหมด
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+      <hr>
+
+      <ion-row text-center align-items-center>
+        <ion-col col-1>
+          <ion-icon disabled="false" name="pause"></ion-icon>
+        </ion-col>
+        <ion-col col-1>
+          1
+        </ion-col>
+        <ion-col col-2>
+          136
+        </ion-col>
+        <ion-col col-3>
+          ที่ไหนหนิasdvsxgmxgfmnzfnzbdfgm
+        </ion-col>
+        <ion-col col-2>
+          3
+        </ion-col>
+        <ion-col col-2>
+          5
+        </ion-col>
+        <ion-col col-1>
+          <button ion-button type="button" color="danger">
+            ลบ
+          </button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row text-center align-items-center>
+        <ion-col col-1>
+          <ion-icon disabled="false" name="pause"></ion-icon>
+        </ion-col>
+        <ion-col col-1>
+          12
+        </ion-col>
+        <ion-col col-2>
+          136
+        </ion-col>
+        <ion-col col-3>
+          ที่ไหนหนิasdvsxgmxgfmnzfnzbdfgm
+        </ion-col>
+        <ion-col col-2>
+          3
+        </ion-col>
+        <ion-col col-2>
+          5
+        </ion-col>
+        <ion-col col-1>
+          <button ion-button type="button" color="danger">
+            ลบ
+          </button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row text-center align-items-center>
+        <ion-col col-1>
+          <ion-icon disabled="false" name="pause"></ion-icon>
+        </ion-col>
+        <ion-col col-1>
+          123
+        </ion-col>
+        <ion-col col-2>
+          136
+        </ion-col>
+        <ion-col col-3>
+          ที่ไหนหนิasdvsxgmxgfmnzfnzbdfgm
+        </ion-col>
+        <ion-col col-2>
+          3
+        </ion-col>
+        <ion-col col-2>
+          5
+        </ion-col>
+        <ion-col col-1>
+          <button ion-button type="button" color="danger">
+            ลบ
+          </button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngSwitchCase="'areayoi'">
+      <ion-row align-items-center>
+        <ion-col col-11>
+          <ion-searchbar></ion-searchbar>
+        </ion-col>
+        <ion-col col-1>
+          <button ion-button type="button" color="light">
+            <ion-icon name="md-search"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+
+      <ion-segment icon-start [(ngModel)]="icons">
+        <ion-segment-button value="lastest">
+          <ion-icon name="md-create"></ion-icon>
+          ข้อมูลล่าสุด
+        </ion-segment-button>
+        <ion-segment-button value="all">
+          <ion-icon name="folder"></ion-icon>
+          ข้อมูลทั้งหมด
+        </ion-segment-button>
+        <ion-segment-button value="pause">
+          <ion-icon name="md-pause"></ion-icon>
+          หยุดชั่วคราว
+        </ion-segment-button>
+        <ion-segment-button value="return">
+          <ion-icon name="md-eye"></ion-icon>
+          สำรวจครั้งที่ 2,3
+        </ion-segment-button>
+      </ion-segment>
+
+      <ion-row text-center align-items-center>
+        <ion-col col-2>
+          ลำดับที่
+        </ion-col>
+        <ion-col col-2>
+          หมู่ที่
+        </ion-col>
+        <ion-col col-7>
+          ชื่อหมู่บ้าน
+        </ion-col>
+        <ion-col col-1>
+
+        </ion-col>
+      </ion-row>
+
+      <hr>
+      <ion-row text-center align-items-center>
+        <ion-col col-1>
+          <ion-icon disabled="false" name="pause"></ion-icon>
+        </ion-col>
+        <ion-col col-1>
+          1
+        </ion-col>
+        <ion-col col-2>
+          -
+        </ion-col>
+        <ion-col col-7>
+          -
+        </ion-col>
+        <ion-col col-1>
+          <button ion-button type="button" color="danger">
+            ลบ
+          </button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngSwitchCase="'fsedit'">
+      <ion-row text-center align-items-center>
+        <ion-col col-2>
+          ลำดับที่
+        </ion-col>
+        <ion-col col-2>
+          บ้านเลขที่
+        </ion-col>
+        <ion-col col-3>
+          ชื่อสถานที่
+        </ion-col>
+        <ion-col col-4>
+          <ion-row align-items-center>
+            <ion-label>
+              ครัวเรือน/สถานประกอบการ
+            </ion-label>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              สำรวจแล้ว
+            </ion-col>
+            <ion-col col-6>
+              ทั้งหมด
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col col-1> </ion-col>
+      </ion-row>
+      <hr>
+
+      <hr>
+      <ion-row text-center align-items-center>
+        <ion-col col-2>
+          ลำดับที่
+        </ion-col>
+        <ion-col col-2>
+          หมู่ที่
+        </ion-col>
+        <ion-col col-7>
+          ชื่อหมู่บ้าน
+        </ion-col>
+        <ion-col col-1> </ion-col>
+      </ion-row>
+      <hr>
+    </div>
+  </div>
+
+</ion-content>

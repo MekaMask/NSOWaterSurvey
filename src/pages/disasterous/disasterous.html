@@ -1,0 +1,100 @@
+<ion-header>
+
+  <questionnaire-menu title="ปัญหาอุทกภัย"></questionnaire-menu>
+
+</ion-header>
+
+
+
+<ion-content padding>
+  <form (ngSubmit)="handleSubmit()" [formGroup]="Disasterous">
+
+    <h3>ตอนที่ 6 ปัญหาอุทกภัย</h3>
+
+    <ion-card>
+
+      <ion-card-content>
+
+        <ion-item>
+          <ion-label>
+            6.1 ในรอบ 5 ปีที่ผ่านมา (พ.ศ.2556-2560)<b>ที่อยู่อาศัย</b>นี้
+            <br>ประสบปัญหาอุทกภัย(น้ำท่วมขัง น้ำรอการระบาย) หรือไม่
+          </ion-label>
+        </ion-item>
+
+        <ion-row radio-group formControlName="flooded" [class.invalid]="isValid('flooded')">
+          <ion-item *ngIf="isValid('flooded')">
+            <span class="invalid-msg">
+              กรุณาเลือก
+            </span>
+          </ion-item>
+          <ion-item col-6>
+            <ion-radio [value]=true item-left></ion-radio>
+            <ion-label>
+              มีปัญหา
+            </ion-label>
+          </ion-item>
+          <ion-item col-6>
+            <ion-radio [value]=false item-left></ion-radio>
+            <ion-label>
+              ไม่มีปัญหา
+            </ion-label>
+          </ion-item>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+
+    <div [ngSwitch]="Disasterous.get('flooded').value">
+      <div *ngSwitchCase="true">
+
+        <ion-card>
+
+          <ion-card-content>
+
+            <ion-item>
+              <ion-label>
+                6.2 แต่ละปีเกิดอุทกภัยกี่ครั้ง ระยะเวลาที่น้ำท่วมขังโดยเฉลี่ย
+                <br>นานกี่วัน กี่ชั่วโมง และระดับความสูงของน้ำท่วมสูงกี่เซนติเมตร
+              </ion-label>
+            </ion-item>
+
+            <ion-row text-center>
+              <ion-col col-3></ion-col>
+              <ion-col>
+                <b>ระยะเวลาที่น้ำท่วมขังโดยเฉลี่ย</b>
+              </ion-col>
+            </ion-row>
+
+            <ion-row text-center>
+              <ion-col col-3>
+                <b>ปี</b>
+              </ion-col>
+              <ion-col>
+                <b>จำนวนครั้งที่<br>เกิดอุทกภัย</b>
+              </ion-col>
+              <ion-col>
+                <b>จำนวนวัน</b>
+              </ion-col>
+              <ion-col>
+                <b>จำนวนชั่วโมง</b>
+              </ion-col>
+              <ion-col>
+                <b>ระดับความสูงเฉลี่ย<br>(เซนติเมตร)</b>
+              </ion-col>
+            </ion-row>
+
+            <table-disasterous headline="พ.ศ. 2560" [FormItem]="Disasterous.get('yearsDisasterous').at(0)"></table-disasterous>
+            <table-disasterous headline="พ.ศ. 2559" [FormItem]="Disasterous.get('yearsDisasterous').at(1)"></table-disasterous>
+            <table-disasterous headline="พ.ศ. 2558" [FormItem]="Disasterous.get('yearsDisasterous').at(2)"></table-disasterous>
+            <table-disasterous headline="พ.ศ. 2557" [FormItem]="Disasterous.get('yearsDisasterous').at(3)"></table-disasterous>
+            <table-disasterous headline="พ.ศ. 2556" [FormItem]="Disasterous.get('yearsDisasterous').at(4)"></table-disasterous>
+
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+
+    <form-buttons-bar></form-buttons-bar>
+
+  </form>
+</ion-content>

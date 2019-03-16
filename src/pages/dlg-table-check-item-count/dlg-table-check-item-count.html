@@ -1,0 +1,58 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ text }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <h3>{{ text }}</h3>
+
+  <form [formGroup]="FormItem" (ngSubmit)="okDialog()">
+    <ion-list>
+      <div [class.invalid]="isValid('anycheck')">
+        <ion-item>
+          <ion-checkbox formControlName="hasItem" ></ion-checkbox>
+          <ion-label>
+            มีหรือไม่
+          </ion-label>
+        </ion-item>
+      </div>
+      <ion-item *ngIf="unit == 'เท่าไร'">
+        <ion-label>
+          หากมี มีจำนวน{{ unit }}
+        </ion-label>
+      </ion-item>
+      <ion-item *ngIf="unit != 'เท่าไร'">
+        <ion-label>
+          หากมี มีจำนวนกี่{{ unit }}
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-input type="number" formControlName="itemCount" [class.invalid]="isValid('itemCount')"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="isValid('itemCount')">
+        <span class="invalid-msg">
+          กรุณาเลือก
+        </span>
+      </ion-item>
+    </ion-list>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button ion-button type="button" block color="light" (click)="closeDialog()">Cancel</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button block [disabled]="FormItem.invalid">OK</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </form>
+
+
+</ion-content>

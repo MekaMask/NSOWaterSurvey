@@ -1,0 +1,63 @@
+<div [formGroup]="FormItem">
+
+  <ion-card>
+    <ion-card-header>
+      <b>โรงเรือนที่ {{ no }}</b>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>
+          1) ตั้งอยู่ที่ใด (จังหวัด อำเภอ ตำบล)
+        </ion-label>
+      </ion-item>
+
+      <location [FormItem]="FormItem.get('location')"></location>
+
+      <ion-item>
+        <ion-label>
+          2) ขนาดพื้นที่เท่าไร กี่ตารางเมตร
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-input formControlName="areaSqM" type="number" placeholder="กรอกจำนวน" [class.invalid]="isValid('areaSqM')"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="isValid('areaSqM')">
+        <span class="invalid-msg">
+          กรุณากรอกจำนวน
+        </span>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          3) โรงเรือนนี้ตั้งอยู่ในเขตชลประทานหรือไม่
+        </ion-label>
+      </ion-item>
+
+      <ion-row radio-group formControlName="irrigationField" [class.invalid]="isValid('irrigationField')">
+        <ion-item *ngIf="isValid('irrigationField')">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item>
+        <ion-item col-6>
+          <ion-radio [value]="true" item-left></ion-radio>
+          <ion-label>
+            1. อยู่
+          </ion-label>
+        </ion-item>
+        <ion-item col-6>
+          <ion-radio [value]="false" item-left></ion-radio>
+          <ion-label>
+            2. ไม่อยู่
+          </ion-label>
+        </ion-item>
+      </ion-row>
+
+      <water-sources9 [FormItem]="FormItem.get('waterSources')" [headline]="'4) โรงเรือนนี้ใช้น้ำจากแหล่งใดบ้าง (เลือกได้หลายข้อ)'"></water-sources9>
+
+    </ion-card-content>
+  </ion-card>
+
+
+</div>
